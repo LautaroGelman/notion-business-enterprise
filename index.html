@@ -29,6 +29,34 @@ section[id]{scroll-margin-top:84px}
 .navlink[aria-current="true"]{color:#FFFFFF;background:#1E3A8A;border-color:#1E3A8A}
 #navprog{height:3px;width:0;background:linear-gradient(90deg,#1D4ED8,#5B21B6);transition:width .1s linear}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.navlink,#navprog{transition:none}}
+#selbar{display:none}
+@media (max-width:640px){
+#secnav .secnav-in{padding:8px 14px;gap:6px}
+.navlink{min-height:40px;padding:0 13px;font-size:13px}
+section[id]{scroll-margin-top:70px}
+main{padding-left:16px!important;padding-right:16px!important;gap:56px!important}
+header{padding-left:16px!important;padding-right:16px!important}
+article{padding:18px!important}
+.cmp-wrap{overflow:visible!important;border:none!important;border-radius:0!important}
+.cmp-table{min-width:0!important;display:flex;flex-direction:column;gap:10px}
+.cmp-head,.cmp-hint{display:none!important}
+.cmp-group{background:transparent!important;border-top:none!important;margin-top:10px}
+.cmp-group>[role=cell]{position:static!important;background:transparent!important;padding:0 2px!important;color:#1E3A8A!important}
+.cmp-row{grid-template-columns:1fr 1fr!important;border:1px solid #E2E8F0!important;border-radius:12px;overflow:hidden}
+.cmp-rh{grid-column:1/-1;position:static!important;border-right:none!important;border-bottom:1px solid #F1F5F9;padding:12px 14px!important;align-items:center!important}
+.cmp-c{padding:10px 14px 12px!important;font-size:14px!important;word-break:break-word}
+.cmp-c::before{content:attr(data-plan);display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.cmp-biz::before{color:#1D4ED8}
+.cmp-ent::before{color:#5B21B6}
+.cmp-ent{border-left:1px solid #EDE9FE}
+.sel-aside{position:static!important;flex-basis:100%!important;box-shadow:none!important;padding:20px!important}
+#selbar{display:flex;flex-direction:column;align-items:flex-start;gap:2px;position:fixed;left:12px;right:12px;bottom:12px;z-index:30;border:none;border-radius:14px;padding:10px 16px;color:#FFFFFF;font-family:Inter,system-ui,sans-serif;text-align:left;box-shadow:0 10px 30px rgba(15,23,42,.3);cursor:pointer;transform:translateY(140%);transition:transform .25s ease}
+#selbar.on{transform:none}
+#sel{padding-bottom:72px}
+#tip{max-width:calc(100vw - 24px)}
+footer{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){#selbar{transition:none}}
 </style>
 </head>
 <body>
@@ -209,6 +237,7 @@ section[id]{scroll-margin-top:84px}
 </main>
 </div>
 <div id="tip" role="tooltip"></div>
+<button type="button" id="selbar" aria-label="Ver el plan recomendado"></button>
 <script>
 var Y = '✓';
 var NO = '';
@@ -429,24 +458,24 @@ function diffRows() {
 
 function renderCmp() {
   var cols = 'grid-template-columns: minmax(220px, 1.3fr) repeat(2, minmax(0, 1fr))';
-  var out = '<div style="overflow-x: auto; border: 1px solid #E2E8F0; border-radius: 12px"><div role="table" aria-label="Diferencias entre Business y Enterprise" style="min-width: 600px">'
-    + '<div role="row" style="display: grid; ' + cols + '; background: #0F172A; color: #FFFFFF">'
+  var out = '<div class="cmp-wrap" style="overflow-x: auto; border: 1px solid #E2E8F0; border-radius: 12px"><div role="table" class="cmp-table" aria-label="Diferencias entre Business y Enterprise" style="min-width: 600px">'
+    + '<div role="row" class="cmp-head" style="display: grid; ' + cols + '; background: #0F172A; color: #FFFFFF">'
     + '<div role="columnheader" style="padding: 14px 16px; font-size: 13px; font-weight: 600; position: sticky; left: 0; background: #0F172A">Función</div>'
     + '<div role="columnheader" style="padding: 14px 16px; font-size: 15px; font-weight: 700; background: #1E3A8A">Business</div>'
     + '<div role="columnheader" style="padding: 14px 16px; font-size: 15px; font-weight: 700; background: #4C1D95">Enterprise</div>'
     + '</div>';
   diffRows().forEach(function (r) {
     if (r[0] === 'g') {
-      out += '<div role="row" style="background: #F1F5F9; border-top: 1px solid #E2E8F0"><div role="cell" style="padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #334155; position: sticky; left: 0; display: inline-block; background: #F1F5F9">' + esc(r[1]) + '</div></div>';
+      out += '<div role="row" class="cmp-group" style="background: #F1F5F9; border-top: 1px solid #E2E8F0"><div role="cell" style="padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #334155; position: sticky; left: 0; display: inline-block; background: #F1F5F9">' + esc(r[1]) + '</div></div>';
       return;
     }
-    out += '<div role="row" style="display: grid; ' + cols + '; border-top: 1px solid #E2E8F0; background: #FFFFFF">'
-      + '<div role="rowheader" style="padding: 12px 16px; font-size: 14px; font-weight: 600; line-height: 1.4; position: sticky; left: 0; background: #FFFFFF; border-right: 1px solid #F1F5F9; display: flex; align-items: flex-start; justify-content: space-between; gap: 4px"><span>' + esc(r[0]) + '</span>' + infoBtn(r[0]) + '</div>'
-      + '<div role="cell" style="padding: 12px 16px; font-size: 14px; line-height: 1.45; font-weight: 500; color: #0F172A; background: #F8FAFF">' + valueHtml(r[3]) + '</div>'
-      + '<div role="cell" style="padding: 12px 16px; font-size: 14px; line-height: 1.45; font-weight: 500; color: #0F172A; background: #FAF5FF">' + valueHtml(r[4]) + '</div>'
+    out += '<div role="row" class="cmp-row" style="display: grid; ' + cols + '; border-top: 1px solid #E2E8F0; background: #FFFFFF">'
+      + '<div role="rowheader" class="cmp-rh" style="padding: 12px 16px; font-size: 14px; font-weight: 600; line-height: 1.4; position: sticky; left: 0; background: #FFFFFF; border-right: 1px solid #F1F5F9; display: flex; align-items: flex-start; justify-content: space-between; gap: 4px"><span>' + esc(r[0]) + '</span>' + infoBtn(r[0]) + '</div>'
+      + '<div role="cell" class="cmp-c cmp-biz" data-plan="Business" style="padding: 12px 16px; font-size: 14px; line-height: 1.45; font-weight: 500; color: #0F172A; background: #F8FAFF">' + valueHtml(r[3]) + '</div>'
+      + '<div role="cell" class="cmp-c cmp-ent" data-plan="Enterprise" style="padding: 12px 16px; font-size: 14px; line-height: 1.45; font-weight: 500; color: #0F172A; background: #FAF5FF">' + valueHtml(r[4]) + '</div>'
       + '</div>';
   });
-  return out + '</div></div><p style="margin: 0; font-size: 13px; color: #64748B">En pantallas chicas, deslice la tabla hacia los costados.</p>';
+  return out + '</div></div><p class="cmp-hint" style="margin: 0; font-size: 13px; color: #64748B">En pantallas chicas, deslice la tabla hacia los costados.</p>';
 }
 
 function renderSel() {
@@ -465,7 +494,7 @@ function renderSel() {
   var countText = count === 0 ? 'Todavía no marcó ninguna necesidad.' : (count === 1 ? '1 necesidad marcada' : count + ' necesidades marcadas');
   var reasonsHtml = reasons.length ? '<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-size: 13px; font-weight: 600; color: #FFFFFF">Exclusivo de Enterprise:</p><ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.5; color: #F1F5F9">' + reasons.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>' : '';
   var out = '<div style="display: flex; flex-direction: row-reverse; flex-wrap: wrap; gap: 20px; align-items: flex-start">'
-    + '<aside aria-live="polite" style="flex: 1 1 300px; position: sticky; top: 84px; z-index: 1; background: ' + PLAN_COLORS[level] + '; color: #FFFFFF; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 10px 30px rgba(15,23,42,.18)">'
+    + '<aside class="sel-aside" aria-live="polite" style="flex: 1 1 300px; position: sticky; top: 84px; z-index: 1; background: ' + PLAN_COLORS[level] + '; color: #FFFFFF; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 10px 30px rgba(15,23,42,.18)">'
     + '<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #E2E8F0">Plan recomendado</p>'
     + '<p style="margin: 0; font-family: \'Source Serif 4\', Georgia, serif; font-size: clamp(36px, 6vw, 48px); font-weight: 700; line-height: 1">' + esc(PLAN_NAMES[level]) + '</p>'
     + '<p style="margin: 0; font-size: 15px; font-weight: 600">' + esc(PLAN_PRICES[level]) + '</p>'
@@ -496,6 +525,13 @@ function render() {
   H = [];
   document.getElementById('cmp').innerHTML = renderCmp();
   document.getElementById('sel').innerHTML = renderSel();
+  var bar = document.getElementById('selbar');
+  if (bar) {
+    var a = document.querySelector('#sel .sel-aside');
+    var name = a.querySelector('p:nth-child(2)').textContent;
+    bar.style.background = name === 'Enterprise' ? '#5B21B6' : '#1D4ED8';
+    bar.innerHTML = '<span style="font-size: 12px; letter-spacing: .1em; text-transform: uppercase; opacity: .85">Plan recomendado</span><strong style="font-size: 18px">' + esc(name) + '</strong>';
+  }
 }
 var tip = document.getElementById('tip');
 var tipBtn = null, tipPinned = false;
@@ -559,6 +595,12 @@ render();
         if (l.getAttribute('aria-current') !== 'true') { l.setAttribute('aria-current', 'true'); var box = l.parentNode; box.scrollLeft = l.offsetLeft - (box.clientWidth - l.offsetWidth) / 2; }
       } else l.removeAttribute('aria-current');
     });
+    var bar = document.getElementById('selbar'), sel = document.getElementById('elegir'), asideEl = document.querySelector('#sel .sel-aside');
+    if (bar && sel && asideEl) {
+      var sr = sel.getBoundingClientRect(), ar = asideEl.getBoundingClientRect();
+      var show = sr.top < window.innerHeight * 0.5 && sr.bottom > window.innerHeight * 0.6 && (ar.bottom < 70 || ar.top > window.innerHeight);
+      bar.classList.toggle('on', show);
+    }
     var max = document.documentElement.scrollHeight - window.innerHeight;
     prog.style.width = (max > 0 ? Math.min(100, window.scrollY / max * 100) : 0) + '%';
   }
@@ -571,6 +613,11 @@ render();
       if (history.replaceState) history.replaceState(null, '', l.getAttribute('href'));
     });
   });
+  document.getElementById('selbar').addEventListener('click', function () {
+    var a = document.querySelector('#sel .sel-aside');
+    window.scrollTo({ top: a.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' });
+  });
+  document.addEventListener('click', function () { setTimeout(update, 0); });
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   update();
