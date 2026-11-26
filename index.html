@@ -7,134 +7,398 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&amp;display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#FFFFFF}
-a{color:#1E3A8A}a:hover{color:#172554}
-button{font-family:Inter,system-ui,sans-serif}
-button:focus-visible,a:focus-visible{outline:3px solid #93C5FD;outline-offset:2px}
-.tag{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;align-self:flex-start}
-.tag-all{color:#334155;background:#F1F5F9}
-.tag-biz{color:#1E40AF;background:#EFF6FF}
-.info{flex:none;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;margin-left:6px;padding:0;border:none;border-radius:50%;background:transparent;color:#64748B;cursor:pointer;vertical-align:middle;position:relative}
-.info::after{content:"";position:absolute;inset:-10px}
-.info:hover,.info[aria-expanded="true"]{color:#1D4ED8;background:#EFF6FF}
-#tip{font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;position:fixed;z-index:50;max-width:320px;background:#0F172A;color:#F8FAFC;font-size:14px;line-height:1.55;padding:12px 14px;border-radius:10px;box-shadow:0 12px 32px rgba(15,23,42,.28);display:none}
-#tip strong{display:block;color:#FFFFFF;margin-bottom:4px}
+*{box-sizing:border-box}
 html{scroll-behavior:smooth}
-section[id]{scroll-margin-top:84px}
-#secnav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(10px);-webkit-backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid #E2E8F0;font-family:Inter,system-ui,sans-serif}
-.secnav-in{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
-.secnav-in::-webkit-scrollbar{display:none}
-.navlink{flex:none;text-decoration:none;font-size:14px;font-weight:600;color:#334155;background:#FFFFFF;border:1px solid #CBD5E1;border-radius:999px;padding:0 16px;min-height:44px;display:inline-flex;align-items:center;transition:background .2s,color .2s,border-color .2s,transform .15s}
-.navlink:hover{color:#1E3A8A;border-color:#1E3A8A;background:#EFF6FF;transform:translateY(-1px)}
+body{margin:0;background:#FFFFFF;font-family:Inter,system-ui,sans-serif;color:#0F172A;-webkit-font-smoothing:antialiased}
+a{color:#1E3A8A}a:hover{color:#172554}
+button{font-family:inherit;color:inherit}
+button:focus-visible,a:focus-visible{outline:3px solid #93C5FD;outline-offset:2px}
+p,h1,h2,h3,h4{margin:0}
+.serif{font-family:'Source Serif 4',Georgia,serif}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#475569}
+.muted{color:#475569}
+.ico{flex:none}
+section[id]{scroll-margin-top:80px}
+
+/* Cabecera */
+header{background:#F8FAFC;border-bottom:1px solid #E2E8F0;padding:28px 0 64px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:48px}
+.top img{height:26px;width:auto;display:block}
+.top .date{font-size:13px;font-weight:500;color:#475569}
+.hero{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-end}
+.hero-txt{flex:1 1 480px;display:flex;flex-direction:column;gap:18px}
+.hero h1{font-weight:700;font-size:clamp(34px,6vw,60px);line-height:1.06;letter-spacing:-.015em}
+.hero .lead{font-size:clamp(16px,2.2vw,20px);line-height:1.5;color:#334155;max-width:560px}
+.hero-kpi{flex:1 1 380px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.kpi{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.kpi .k{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.kpi .v{font-size:32px;font-weight:700;line-height:1}
+.kpi .s{font-size:13px;line-height:1.4;color:#475569}
+.kpi-dark{grid-column:1/-1;background:#0F172A;color:#FFFFFF;border-radius:14px;padding:16px 18px;font-size:15px;line-height:1.5}
+
+/* Navegación */
+#secnav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(10px);-webkit-backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid #E2E8F0}
+.nav-in{max-width:1120px;margin:0 auto;padding:10px 24px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.navlink{flex:none;text-decoration:none;font-size:14px;font-weight:600;color:#334155;border:1px solid #CBD5E1;border-radius:999px;padding:0 16px;min-height:44px;display:inline-flex;align-items:center;background:#FFFFFF;transition:background .2s,color .2s,border-color .2s}
+.navlink:hover{color:#1E3A8A;border-color:#1E3A8A;background:#EFF6FF}
 .navlink[aria-current="true"]{color:#FFFFFF;background:#1E3A8A;border-color:#1E3A8A}
-#navprog{height:3px;width:0;background:linear-gradient(90deg,#1D4ED8,#5B21B6);transition:width .1s linear}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.navlink,#navprog{transition:none}}
-#selbar{display:none}
-@media (max-width:640px){
-#secnav .secnav-in{padding:8px 14px;gap:6px}
-.navlink{min-height:40px;padding:0 13px;font-size:13px}
-section[id]{scroll-margin-top:70px}
-main{padding-left:16px!important;padding-right:16px!important;gap:56px!important}
-header{padding-left:16px!important;padding-right:16px!important}
-article{padding:18px!important}
-.cmp-wrap{overflow:visible!important;border:none!important;border-radius:0!important}
-.cmp-table{min-width:0!important;display:flex;flex-direction:column;gap:10px}
-.cmp-head,.cmp-hint{display:none!important}
-.cmp-group{background:transparent!important;border-top:none!important;margin-top:10px}
-.cmp-group>[role=cell]{position:static!important;background:transparent!important;padding:0 2px!important;color:#1E3A8A!important}
-.cmp-row{grid-template-columns:1fr 1fr!important;border:1px solid #E2E8F0!important;border-radius:12px;overflow:hidden}
-.cmp-rh{grid-column:1/-1;position:static!important;border-right:none!important;border-bottom:1px solid #F1F5F9;padding:12px 14px!important;align-items:center!important}
-.cmp-c{padding:10px 14px 12px!important;font-size:14px!important;word-break:break-word}
-.cmp-c::before{content:attr(data-plan);display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
-.cmp-biz::before{color:#1D4ED8}
-.cmp-ent::before{color:#5B21B6}
-.cmp-ent{border-left:1px solid #EDE9FE}
-.sel-aside{position:static!important;flex-basis:100%!important;box-shadow:none!important;padding:20px!important}
-#selbar{display:flex;flex-direction:column;align-items:flex-start;gap:2px;position:fixed;left:12px;right:12px;bottom:12px;z-index:30;border:none;border-radius:14px;padding:10px 16px;color:#FFFFFF;font-family:Inter,system-ui,sans-serif;text-align:left;box-shadow:0 10px 30px rgba(15,23,42,.3);cursor:pointer;transform:translateY(140%);transition:transform .25s ease}
-#selbar.on{transform:none}
-#sel{padding-bottom:72px}
-#tip{max-width:calc(100vw - 24px)}
-footer{flex-direction:column;align-items:flex-start}
+.navlink .n{opacity:.7;margin-right:6px}
+
+main{padding-bottom:80px;display:flex;flex-direction:column;gap:96px}
+.sec{display:flex;flex-direction:column;gap:28px}
+.sec-head{display:flex;flex-direction:column;gap:8px}
+.sec-head h2{font-size:clamp(28px,4vw,38px);line-height:1.15}
+.sec-head .sub{font-size:15px;line-height:1.6;color:#475569;max-width:720px}
+h3.sub-t{font-size:18px;font-weight:700}
+
+/* Planes */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.plan{border:1px solid #E2E8F0;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:16px}
+.plan.ent{border:2px solid #5B21B6;padding:27px;background:#FDFCFF}
+.plan .name{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.plan .price{font-size:40px;font-weight:700;line-height:1}
+.plan .for{font-size:16px;font-weight:600}
+.badge{font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px;color:#5B21B6;background:#EDE9FE}
+.checks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.45;color:#334155}
+.checks li{display:flex;gap:10px;align-items:flex-start}
+.checks svg{margin-top:2px}
+.checks strong{color:#0F172A}
+
+/* Tabla de valores */
+.vt{border:1px solid #E2E8F0;border-radius:14px;overflow:hidden}
+.vt-head,.vt-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr)}
+.vt-head{background:#0F172A;color:#FFFFFF}
+.vt-head div{padding:14px 18px;font-size:15px;font-weight:700}
+.vt-head div:first-child{font-size:13px;font-weight:600}
+.vt-head .b{background:#1E3A8A}.vt-head .e{background:#4C1D95}
+.vt-row{border-top:1px solid #E2E8F0}
+.vt-name{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:52px;padding:12px 18px;border:none;background:#FFFFFF;text-align:left;font-size:15px;font-weight:600;line-height:1.35;cursor:pointer;width:100%}
+.vt-name:hover{background:#F8FAFC}
+.vt-row.open .vt-name svg{color:#1D4ED8}
+.vt-c{padding:12px 18px;font-size:15px;line-height:1.45;display:flex;flex-direction:column;justify-content:center;gap:3px}
+.vt-c.b{background:#F8FAFF}.vt-c.e{background:#FAF5FF}
+.vt-c .lbl{display:none;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.vt-c.b .lbl{color:#1D4ED8}.vt-c.e .lbl{color:#5B21B6}
+.vt-info{display:none;padding:0 18px 16px;font-size:14px;line-height:1.6;color:#334155;max-width:760px}
+.vt-row.open .vt-info{display:block}
+.notes{font-size:13px;line-height:1.6;color:#475569;display:flex;flex-direction:column;gap:2px}
+
+/* Solo Enterprise */
+.ent-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;align-items:start}
+.eg{border:1px solid #E2E8F0;border-radius:14px;padding:12px 10px 10px;background:#FFFFFF}
+.eg-head{width:100%;display:flex;align-items:center;gap:10px;min-height:40px;padding:4px 8px 8px;border:none;background:transparent;text-align:left;cursor:default;pointer-events:none}
+.eg-head .t{flex:1;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5B21B6}
+.cnt{font-size:12px;font-weight:700;color:#5B21B6;background:#EDE9FE;border-radius:999px;padding:2px 8px}
+.chev{display:none;transition:transform .2s}
+.ei{border-radius:10px}
+.ei.open{background:#F5F3FF}
+.ei-btn{width:100%;display:flex;align-items:center;gap:10px;min-height:44px;padding:8px;border:none;background:transparent;text-align:left;font-size:14px;font-weight:500;line-height:1.35;cursor:pointer;border-radius:10px}
+.ei-btn:hover{background:#F5F3FF}
+.ei-btn .t{flex:1}
+.ei-btn .nt{flex:none;font-size:12px;font-weight:600;color:#475569}
+.ei-info{display:none;padding:0 10px 12px 36px;font-size:13px;line-height:1.55;color:#334155}
+.ei.open .ei-info{display:block}
+
+.sum{background:#F5F3FF;border-radius:16px;padding:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.sum div{display:flex;flex-direction:column;gap:6px}
+.sum .k{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5B21B6}
+.sum p{font-size:15px;line-height:1.55;color:#1E293B}
+
+/* IA */
+.vs{border:1px solid #E2E8F0;border-radius:16px;overflow:hidden}
+.vs-tabs{display:none}
+.vs-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.vs-col{padding:24px;display:flex;flex-direction:column;gap:14px}
+.vs-col.g{background:#F8FAFC}.vs-col.n{background:#EFF6FF}
+.vs-col .k{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.vs-col ul{margin:0;padding-left:18px;font-size:15px;line-height:1.55;display:flex;flex-direction:column;gap:6px}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.ft{border:1px solid #E2E8F0;border-radius:14px}
+.ft-head{width:100%;display:flex;align-items:center;gap:14px;padding:20px 20px 4px;border:none;background:transparent;text-align:left;cursor:default;pointer-events:none}
+.ft-ico{flex:none;width:40px;height:40px;border-radius:10px;background:#EFF6FF;display:inline-flex;align-items:center;justify-content:center}
+.ft-head .t{flex:1;font-size:16px;font-weight:700}
+.ft-txt{padding:0 20px 20px 74px;font-size:14px;line-height:1.55;color:#334155}
+.credits{background:#0F172A;color:#FFFFFF;border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:20px}
+.credits .ttl{font-size:18px;font-weight:700}
+.cr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.cr{background:#1E293B;border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.cr .v{font-size:34px;font-weight:700;line-height:1}
+.cr .k{font-size:14px;font-weight:700}
+.cr .s{font-size:13px;line-height:1.5;color:#CBD5E1}
+.credits .foot{font-size:14px;line-height:1.55;color:#CBD5E1}
+
+/* Test */
+.quiz{display:flex;flex-direction:row-reverse;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.res{flex:1 1 300px;position:sticky;top:84px;color:#FFFFFF;border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:12px;box-shadow:0 10px 30px rgba(15,23,42,.18);transition:background .25s}
+.res .k{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#E2E8F0}
+.res .nm{font-size:48px;font-weight:700;line-height:1}
+.res .pr{font-size:15px;font-weight:600}
+.res .why{font-size:15px;line-height:1.55;color:#F1F5F9}
+.res ul{margin:0;padding-left:18px;font-size:14px;line-height:1.5;color:#F1F5F9}
+.res .cnt-t{font-size:13px;color:#E2E8F0}
+.res button{align-self:flex-start;min-height:44px;padding:0 16px;border-radius:8px;border:1px solid rgba(255,255,255,.7);background:transparent;color:#FFFFFF;font-size:14px;font-weight:600;cursor:pointer}
+.res-bar{display:none}
+.qs{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.qg{display:flex;flex-direction:column;gap:10px}
+.qg-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.qg-h .t{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.qg-h .bd{font-size:12px;font-weight:700;border-radius:999px;padding:3px 9px}
+.qg-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+.qi{display:flex;align-items:flex-start;gap:12px;text-align:left;min-height:64px;padding:14px;border-radius:12px;border:1px solid #CBD5E1;background:#F8FAFC;cursor:pointer}
+.qi:hover{border-color:#64748B}
+.qi .box{flex:none;width:22px;height:22px;margin-top:1px;border-radius:6px;border:2px solid #64748B;background:#FFFFFF;display:inline-flex;align-items:center;justify-content:center}
+.qi .tx{flex:1;display:flex;flex-direction:column;gap:3px}
+.qi .l{font-size:15px;font-weight:600;line-height:1.35}
+.qi .q{font-size:13px;line-height:1.45;color:#475569}
+
+/* Antes de contratar */
+.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.tp{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:14px}
+.tp-head{width:100%;display:flex;align-items:center;gap:14px;padding:20px 20px 4px;border:none;background:transparent;text-align:left;cursor:default;pointer-events:none}
+.num{flex:none;width:30px;height:30px;border-radius:50%;background:#1E3A8A;color:#FFFFFF;font-size:14px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.tp-head .t{flex:1;font-size:16px;font-weight:700;line-height:1.35}
+.tp-txt{padding:0 20px 20px 64px;font-size:14px;line-height:1.55;color:#334155}
+
+footer{border-top:1px solid #E2E8F0;padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;font-size:13px;line-height:1.6;color:#475569}
+footer .by{font-weight:600;color:#334155;display:inline-flex;align-items:center;gap:10px}
+footer img{height:26px;width:auto;display:block}
+
+/* ---------- Celular ---------- */
+@media (max-width:720px){
+  .wrap{padding:0 16px}
+  header{padding:18px 0 28px}
+  .top{margin-bottom:22px}
+  .top img{height:22px}
+  .top .date{font-size:12px}
+  .hero{gap:22px}
+  .hero-txt{gap:12px}
+  .hero-kpi{gap:10px}
+  .kpi{padding:14px;border-radius:12px}
+  .kpi .k{font-size:11px}
+  .kpi .v{font-size:26px}
+  .kpi .s{font-size:12px}
+  .kpi-dark{font-size:14px;padding:12px 14px;border-radius:12px}
+  .nav-in{padding:8px 14px;gap:6px}
+  .navlink{font-size:13px;padding:0 13px}
+  .navlink .n{display:none}
+  section[id]{scroll-margin-top:64px}
+  main{gap:56px;padding-bottom:48px}
+  #planes{padding-top:36px!important}
+  .sec{gap:18px}
+  .sec-head .sub{font-size:14px;line-height:1.5}
+  .eyebrow{font-size:12px}
+  h3.sub-t{font-size:16px}
+  .plan{padding:18px;gap:12px;border-radius:14px}
+  .plan.ent{padding:17px}
+  .plan .price{font-size:30px}
+  .plan .for{font-size:15px}
+  .checks{font-size:14px;gap:8px}
+
+  .vt{border:none;border-radius:0;overflow:visible;display:flex;flex-direction:column;gap:10px}
+  .vt-head{display:none}
+  .vt-row{border:1px solid #E2E8F0;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  .vt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vt-name{grid-column:1/-1;min-height:44px;padding:10px 14px;font-size:14px;border-bottom:1px solid #F1F5F9}
+  .vt-c{padding:10px 14px 12px;font-size:14px;justify-content:flex-start}
+  .vt-c.e{border-left:1px solid #EDE9FE}
+  .vt-c .lbl{display:block}
+  .vt-info{order:-1;padding:10px 14px;font-size:13px;background:#F8FAFC;border-bottom:1px solid #F1F5F9}
+  .vt-row .vt-info{order:0}
+  .notes{font-size:12px}
+
+  .ent-grid{display:block;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden}
+  .eg{border:none;border-top:1px solid #E2E8F0;border-radius:0;padding:0}
+  .eg:first-child{border-top:none}
+  .eg-head{pointer-events:auto;cursor:pointer;min-height:52px;padding:12px 14px}
+  .eg-head .t{font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:#0F172A}
+  .eg.open .eg-head{background:#FAF5FF}
+  .chev{display:block}
+  .eg.open .eg-head .chev,.ft.open .chev,.tp.open .chev{transform:rotate(180deg)}
+  .eg-body{display:none;padding:0 6px 8px}
+  .eg.open .eg-body{display:block}
+
+  .sum{padding:18px;gap:14px;border-radius:14px}
+  .sum .k{font-size:11px}
+  .sum p{font-size:14px}
+
+  .vs{border:none;border-radius:0;overflow:visible;display:flex;flex-direction:column;gap:10px}
+  .vs-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:4px;background:#F1F5F9;border-radius:12px}
+  .vs-tabs button{min-height:44px;border:none;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;background:transparent;color:#475569}
+  .vs-tabs button[aria-pressed="true"]{background:#FFFFFF;color:#1E40AF;box-shadow:0 1px 3px rgba(15,23,42,.15)}
+  .vs-col{border-radius:12px;padding:16px}
+  .vs-col .k{display:none}
+  .vs-col ul{font-size:14px;line-height:1.5}
+  .vs[data-tab="notion"] .vs-col.g,.vs[data-tab="general"] .vs-col.n{display:none}
+
+  .feats,.tips{display:block;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden}
+  .ft,.tp{border:none;border-top:1px solid #E2E8F0;border-radius:0;background:#FFFFFF}
+  .ft:first-child,.tp:first-child{border-top:none}
+  .ft-head,.tp-head{pointer-events:auto;cursor:pointer;min-height:52px;padding:8px 14px;gap:12px}
+  .ft-ico{width:34px;height:34px;border-radius:9px}
+  .ft-ico svg{width:18px;height:18px}
+  .ft-head .t,.tp-head .t{font-size:15px;font-weight:600}
+  .num{width:26px;height:26px;font-size:13px}
+  .ft-txt,.tp-txt{display:none;padding:0 14px 14px 60px;font-size:13px}
+  .tp-txt{padding-left:52px;font-size:14px}
+  .ft.open .ft-txt,.tp.open .tp-txt{display:block}
+
+  .credits{padding:18px;gap:14px;border-radius:14px}
+  .credits .ttl{font-size:16px}
+  .cr-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .cr{padding:12px;border-radius:10px;gap:4px}
+  .cr .v{font-size:24px}
+  .cr .k{font-size:13px}
+  .cr .s{font-size:12px;line-height:1.45}
+  .credits .foot{font-size:12px;line-height:1.5}
+
+  .quiz{flex-direction:column;gap:16px}
+  .res{position:static;flex:none;width:100%;order:2;padding:20px;border-radius:16px;box-shadow:none}
+  .res .nm{font-size:36px}
+  .res .pr,.res .why{font-size:14px}
+  .res-bar{display:flex;position:sticky;top:62px;z-index:5;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:12px;color:#FFFFFF;box-shadow:0 8px 20px rgba(15,23,42,.18);transition:background .25s}
+  .res-bar .k{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#E2E8F0;display:block}
+  .res-bar .nm{font-size:22px;font-weight:700;line-height:1.1}
+  .res-bar .c{font-size:12px;font-weight:600;color:#F1F5F9;text-align:right}
+  .qs{flex:none;width:100%;order:1;gap:20px}
+  .qg-h{justify-content:space-between}
+  .qg-h .t{font-size:12px}
+  .qg-h .bd{font-size:11px}
+  .qg-items{grid-template-columns:minmax(0,1fr)}
+  .qi{min-height:56px;padding:12px}
+
+  footer{flex-direction:column;align-items:flex-start;font-size:12px}
 }
-@media (prefers-reduced-motion:reduce){#selbar{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.navlink,.chev,.res,.res-bar{transition:none}}
 </style>
 </head>
 <body>
-<div style="font-family: Inter, system-ui, sans-serif; color: #0F172A; background: #FFFFFF; -webkit-font-smoothing: antialiased">
 
-<header style="background: #F8FAFC; border-bottom: 1px solid #E2E8F0; padding: clamp(40px, 8vw, 96px) 20px clamp(40px, 6vw, 72px)">
-<div style="max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px">
-<p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #1E3A8A">Guía para elegir plan · Verificada el 25 de noviembre de 2026</p>
-<h1 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: clamp(34px, 6vw, 60px); line-height: 1.08; letter-spacing: -.015em; max-width: 820px">¿Notion Business o Notion Enterprise?</h1>
-<p style="margin: 0; font-size: clamp(16px, 2.2vw, 19px); line-height: 1.6; color: #334155; max-width: 720px">Una comparación de los planes Business y Enterprise alineada con la tabla oficial de Notion: en qué se diferencian, qué aporta la IA de Notion y cómo identificar el plan adecuado para su organización.</p>
+<header>
+<div class="wrap">
+<div class="top">
+<a href="https://viamatica.com" target="_blank" rel="noopener"><img src="https://viamatica.com/wp-content/uploads/2026/09/logo-grupo-Viamatica.png" alt="Viamatica" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Viamatica',style:'font-weight:700;font-size:18px;color:#1E3A8A'}))"></a>
+<p class="date">Verificada con notion.com/es/pricing · 25 de noviembre de 2026</p>
+</div>
+<div class="hero">
+<div class="hero-txt">
+<p class="eyebrow" style="color:#1E3A8A">Guía para elegir plan</p>
+<h1 class="serif">¿Notion Business o Notion Enterprise?</h1>
+<p class="lead">Mismo producto, misma IA. Lo que cambia es la <strong style="color:#0F172A">seguridad, el control y el acompañamiento</strong>.</p>
+</div>
+<div class="hero-kpi">
+<div class="kpi"><p class="k" style="color:#1D4ED8">Business</p><p class="v serif">USD 20</p><p class="s">por licencia por mes, pago anual</p></div>
+<div class="kpi"><p class="k" style="color:#5B21B6">Enterprise</p><p class="v serif">A medida</p><p class="s">precio cotizado con ventas de Notion</p></div>
+<p class="kpi-dark"><strong><span id="entCount">17</span> funciones</strong> son exclusivas de Enterprise. Todo lo demás es igual en ambos planes.</p>
+</div>
+</div>
 </div>
 </header>
 
 <nav id="secnav" aria-label="Secciones">
-<div class="secnav-in">
-<a href="#planes" class="navlink">Planes</a>
-<a href="#comparativa" class="navlink">Comparativa</a>
-<a href="#ia" class="navlink">IA de Notion</a>
-<a href="#elegir" class="navlink">¿Qué plan necesito?</a>
-<a href="#contratar" class="navlink">Antes de contratar</a>
+<div class="nav-in">
+<a href="#planes" class="navlink"><span class="n">1</span>Planes</a>
+<a href="#comparativa" class="navlink"><span class="n">2</span>Qué cambia</a>
+<a href="#ia" class="navlink"><span class="n">3</span>IA de Notion</a>
+<a href="#elegir" class="navlink"><span class="n">4</span>¿Qué plan necesito?</a>
+<a href="#contratar" class="navlink"><span class="n">5</span>Antes de contratar</a>
 </div>
-<div id="navprog" aria-hidden="true"></div>
 </nav>
 
-<main style="max-width: 1080px; margin: 0 auto; padding: 0 20px 80px; display: flex; flex-direction: column; gap: clamp(56px, 9vw, 96px)">
+<main class="wrap">
 
-<section id="planes" style="padding-top: clamp(40px, 7vw, 72px); display: flex; flex-direction: column; gap: 24px">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 4vw, 36px); line-height: 1.2">Los dos planes, en síntesis</h2>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #475569">Precios de lista en USD por licencia por mes. Enterprise incluye todo lo de Business.</p>
+<section id="planes" class="sec" style="padding-top:72px">
+<div class="sec-head">
+<p class="eyebrow">1 · Los dos planes</p>
+<h2 class="serif">En síntesis</h2>
+<p class="sub">Precios de lista en USD por licencia por mes. Enterprise incluye todo lo de Business.</p>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px">
-<article style="border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 8px">
-<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #1D4ED8">Business</p>
-<p style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 34px; font-weight: 700">USD 20</p>
-<p style="margin: 0; font-size: 13px; color: #64748B">Pago anual · USD 24 con pago mensual</p>
-<p style="margin: 8px 0 0; font-size: 15px; line-height: 1.55; color: #334155">Para empresas en crecimiento. 1500 créditos Estándar y 500 créditos Select por licencia por mes, agentes personalizados, SSO de SAML, verificación de dominios y espacios de equipo privados.</p>
+<div class="plans">
+<article class="plan">
+<div style="display:flex;flex-direction:column;gap:6px">
+<p class="name" style="color:#1D4ED8">Business</p>
+<p class="price serif">USD 20</p>
+<p class="muted" style="font-size:14px">Pago anual · USD 24 con pago mensual</p>
+</div>
+<p class="for">Para empresas en crecimiento</p>
+<ul class="checks" data-color="#1D4ED8">
+<li><span><strong>1500 créditos Estándar y 500 Select</strong> por licencia por mes</span></li>
+<li><span>Agentes personalizados</span></li>
+<li><span>SSO de SAML y verificación de dominios</span></li>
+<li><span>Espacios de equipo privados</span></li>
+</ul>
 </article>
-<article style="border: 2px solid #5B21B6; border-radius: 14px; padding: 21px; display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap">
-<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #5B21B6">Enterprise</p>
-<span class="tag" style="color: #5B21B6; background: #F5F3FF">Recomendado</span>
+<article class="plan ent">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+<p class="name" style="color:#5B21B6">Enterprise</p>
+<span class="badge">Recomendado</span>
 </div>
-<p style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 34px; font-weight: 700">Precios personalizados</p>
-<p style="margin: 0; font-size: 13px; color: #64748B">Cotización con el equipo de ventas de Notion</p>
-<p style="margin: 8px 0 0; font-size: 15px; line-height: 1.55; color: #334155">Para organizaciones que necesitan escala, control y seguridad. SCIM, registro de auditoría, conexiones de seguridad y cumplimiento, conexiones avanzadas, sin conservación de datos en los proveedores de IA y acompañamiento personalizado para la adopción.</p>
+<p class="price serif">Precios personalizados</p>
+<p class="muted" style="font-size:14px">Cotización con el equipo de ventas de Notion</p>
+</div>
+<p class="for">Todo Business, más escala, control y seguridad</p>
+<ul class="checks" data-color="#5B21B6">
+<li><span>SCIM y registro de auditoría</span></li>
+<li><span>Conexiones de seguridad y cumplimiento, y conexiones avanzadas</span></li>
+<li><span><strong>Sin conservación de datos</strong> en los proveedores de IA</span></li>
+<li><span>Acompañamiento personalizado para la adopción</span></li>
+</ul>
 </article>
 </div>
 </section>
 
-<section id="comparativa" style="display: flex; flex-direction: column; gap: 20px">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 4vw, 36px); line-height: 1.2">Business frente a Enterprise: solo lo que cambia</h2>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #475569">Se muestran únicamente las filas en las que Business y Enterprise difieren; todo lo demás es igual en ambos planes. <strong>✓</strong> = incluido · <strong>—</strong> = no incluido · <strong>ⓘ</strong> = toque o pase el cursor para ver qué significa cada función.</p>
-</div>
-<div id="cmp" style="display: flex; flex-direction: column; gap: 20px"></div>
-<div style="font-size: 13px; line-height: 1.6; color: #64748B; display: flex; flex-direction: column; gap: 4px">
-<p style="margin: 0">Notion muestra los precios de la tabla con pago anual; la fila de pago mensual corresponde al selector “Pago mensual” de la misma página.</p>
-<p style="margin: 0">Búsqueda Enterprise: Notion muestra esta celda con logos de apps; aquí se listan por nombre.</p>
+<section id="comparativa" class="sec" style="gap:36px">
+<div class="sec-head">
+<p class="eyebrow">2 · Business frente a Enterprise</p>
+<h2 class="serif">Solo lo que cambia</h2>
+<p class="sub">Todo lo que no aparece aquí es igual en ambos planes. Toque el nombre de una función para ver qué significa.</p>
 </div>
 
-<div style="border-left: 4px solid #5B21B6; background: #FAF5FF; border-radius: 0 12px 12px 0; padding: 18px 22px; margin-top: 8px">
-<p style="margin: 0; font-size: 16px; line-height: 1.7; color: #1E293B">Business y Enterprise comparten el mismo producto, la misma IA de Notion y las mismas funciones de colaboración; la diferencia está en la <strong>seguridad y el control</strong>. Enterprise suma aprovisionamiento automático de usuarios (SCIM), registro de auditoría, conexiones con herramientas SIEM y DLP, controles avanzados para impedir compartir con terceros, gestión de dominios y cero conservación de datos en los proveedores de IA. Además, ofrece <strong>acompañamiento personalizado para la adopción</strong>: un equipo de Notion dedicado a la cuenta (Customer Success) y atención prémium, para que la organización despliegue Notion y le saque el máximo provecho desde el primer día.</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 class="sub-t">Mismo recurso, distinto alcance</h3>
+<div class="vt" role="table" aria-label="Funciones con distinto alcance en Business y Enterprise">
+<div class="vt-head" role="row"><div role="columnheader">Función</div><div role="columnheader" class="b">Business</div><div role="columnheader" class="e">Enterprise</div></div>
+<div id="vtRows"></div>
+</div>
+<div class="notes">
+<p>Notion muestra los precios de la tabla con pago anual; la fila de pago mensual corresponde al selector “Pago mensual” de la misma página.</p>
+<p>Búsqueda Enterprise: Notion muestra esta celda con logos de apps; aquí se listan por nombre.</p>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap">
+<h3 class="sub-t">Solo en Enterprise</h3>
+<p class="muted" style="font-size:14px"><span id="entCount2">17</span> funciones que Business no incluye</p>
+</div>
+<div class="ent-grid" id="entGroups"></div>
+</div>
+
+<div class="sum">
+<div><p class="k">Lo que comparten</p><p>El mismo producto, la misma IA de Notion y las mismas funciones de colaboración.</p></div>
+<div><p class="k">Lo que suma Enterprise</p><p><strong>Seguridad y control:</strong> SCIM, auditoría, SIEM y DLP, controles para no compartir con terceros, gestión de dominios y cero conservación de datos en IA.</p></div>
+<div><p class="k">Y además</p><p><strong>Acompañamiento para la adopción:</strong> un equipo de Notion dedicado a la cuenta (Customer Success) y atención prémium desde el primer día.</p></div>
 </div>
 </section>
 
-<section id="ia" style="display: flex; flex-direction: column; gap: 28px">
-<div style="display: flex; flex-direction: column; gap: 10px">
-<p style="margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #1D4ED8">Créditos mensuales incluidos en Business y Enterprise</p>
-<h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 4vw, 36px); line-height: 1.2; max-width: 760px">La IA de Notion no es otra suscripción de chat</h2>
-<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #334155; max-width: 760px">Pagar la IA de Notion no equivale a pagar Claude, ChatGPT o Gemini. Esos asistentes son de propósito general: conversan, redactan y analizan lo que se les comparte. La IA de Notion está integrada al espacio de trabajo: trabaja sobre sus páginas y bases de datos, y en ambos planes puede operar sola mediante agentes personalizados. Son herramientas complementarias, no sustitutas.</p>
+<section id="ia" class="sec" style="gap:32px">
+<div class="sec-head">
+<p class="eyebrow">3 · Incluida en Business y Enterprise</p>
+<h2 class="serif" style="max-width:760px">La IA de Notion no es otra suscripción de chat</h2>
+<p class="sub" style="font-size:17px;color:#334155">Claude, ChatGPT o Gemini son asistentes generales. La IA de Notion trabaja <strong>dentro de sus páginas y bases de datos</strong>, y puede operar sola con agentes personalizados. Se complementan; no se sustituyen.</p>
 </div>
 
-<div style="border: 1px solid #E2E8F0; border-radius: 14px; overflow: hidden">
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
-<div style="padding: 22px; background: #F8FAFC; display: flex; flex-direction: column; gap: 12px">
-<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #475569">Asistente de IA general</p>
-<ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.6; color: #334155; display: flex; flex-direction: column; gap: 6px">
+<div class="vs" id="vs" data-tab="notion">
+<div class="vs-tabs" role="group" aria-label="Comparar asistentes">
+<button type="button" data-tab="general" aria-pressed="false">IA general</button>
+<button type="button" data-tab="notion" aria-pressed="true">IA de Notion</button>
+</div>
+<div class="vs-cols">
+<div class="vs-col g">
+<p class="k" style="color:#475569">Asistente de IA general</p>
+<ul style="color:#334155">
 <li>Trabaja en su propia ventana de chat.</li>
 <li>Usa el contexto que el usuario le da o conecta.</li>
 <li>Responde y redacta; el resultado se copia a otra herramienta.</li>
@@ -142,9 +406,9 @@ footer{flex-direction:column;align-items:flex-start}
 <li>Ideal para razonamiento, escritura y análisis general.</li>
 </ul>
 </div>
-<div style="padding: 22px; background: #EFF6FF; display: flex; flex-direction: column; gap: 12px">
-<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #1E40AF">IA de Notion</p>
-<ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.6; color: #1E293B; display: flex; flex-direction: column; gap: 6px">
+<div class="vs-col n">
+<p class="k" style="color:#1E40AF">IA de Notion</p>
+<ul style="color:#1E293B">
 <li>Vive dentro de las páginas y bases de datos.</li>
 <li>Busca respuestas en todo el espacio de trabajo.</li>
 <li>Genera y edita documentos y rellena bases de datos.</li>
@@ -155,221 +419,76 @@ footer{flex-direction:column;align-items:flex-start}
 </div>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px">
-<article style="border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"></path></svg>
-<h3 style="margin: 0; font-size: 18px; font-weight: 700">Agente de Notion</h3>
-<span class="tag tag-all">Business y Enterprise</span>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #334155">Chat, generación, autocompletado y traducción: conversa sobre cualquier tema, crea y edita documentos, rellena bases de datos y encuentra respuestas en el espacio de trabajo.</p>
-</article>
-<article style="border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path></svg>
-<h3 style="margin: 0; font-size: 18px; font-weight: 700">Anotador con IA</h3>
-<span class="tag tag-all">Business y Enterprise</span>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #334155">Transcribe las reuniones y genera un resumen que queda guardado en Notion. En Enterprise, los administradores pueden programar la eliminación de las transcripciones.</p>
-</article>
-<article style="border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"></path><path d="M9 8h5"></path><path d="M9 12h5"></path></svg>
-<h3 style="margin: 0; font-size: 18px; font-weight: 700">Biblioteca de habilidades</h3>
-<span class="tag tag-all">Business y Enterprise</span>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #334155">Instrucciones reutilizables para los agentes, compartidas con todo el equipo: se escriben una vez y cualquiera las aplica igual.</p>
-</article>
-<article style="border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
-<h3 style="margin: 0; font-size: 18px; font-weight: 700">Búsqueda Enterprise</h3>
-<span class="tag tag-biz">Business y Enterprise</span>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #334155">Responde con información de Notion y de apps conectadas como Slack, Microsoft Teams y GitHub. Las conexiones con Jira, Box, OneDrive, Salesforce y Asana están en beta.</p>
-</article>
-<article style="border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-<h3 style="margin: 0; font-size: 18px; font-weight: 700">Agentes personalizados</h3>
-<span class="tag tag-biz">Business y Enterprise</span>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #334155">Agentes que se encargan solos de tareas repetitivas, como el reporte semanal o la clasificación de pedidos, para que el equipo no tenga que hacerlas.</p>
-</article>
-<article style="border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4"></path><path d="M16 8l4 4-4 4"></path><path d="M14 5l-4 14"></path></svg>
-<h3 style="margin: 0; font-size: 18px; font-weight: 700">Workers (beta)</h3>
-<span class="tag tag-biz">Business y Enterprise</span>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #334155">Código personalizado que corre dentro de Notion para ampliar los agentes, sincronizar datos y activar flujos de trabajo, sin infraestructura propia.</p>
-</article>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 class="sub-t">Seis funciones, en ambos planes</h3>
+<div class="feats" id="feats"></div>
 </div>
 
-<div style="background: #0F172A; color: #FFFFFF; border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
-<p style="margin: 0; font-size: 16px; font-weight: 700">Cómo se consumen los créditos</p>
-<ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.6; color: #CBD5E1; display: flex; flex-direction: column; gap: 6px">
-<li><strong style="color: #FFFFFF">Créditos Estándar</strong>: trabajo en el que Notion elige el modelo, como el Agente de Notion en Auto, el Anotador con IA y el autocompletado de bases de datos. Business: 1500 por licencia por mes.</li>
-<li><strong style="color: #FFFFFF">Créditos Select</strong>: trabajo en el que usted elige el modelo y los agentes personalizados propios. Business: 500 por licencia por mes.</li>
-<li><strong style="color: #FFFFFF">Enterprise</strong>: montos de créditos personalizados.</li>
-<li>Para uso adicional, los administradores pueden comprar créditos de Notion para el espacio de trabajo.</li>
-<li><strong style="color: #FFFFFF">Conservación de datos</strong>: los proveedores de IA conservan datos 30 días en Business; en Enterprise no hay conservación de datos.</li>
-</ul>
+<div class="credits">
+<p class="ttl">Cómo se consumen los créditos</p>
+<div class="cr-grid">
+<div class="cr"><p class="v serif">1500</p><p class="k">Créditos Estándar</p><p class="s">Por licencia por mes en Business. Notion elige el modelo: Agente en Auto, Anotador con IA, autocompletado de bases de datos.</p></div>
+<div class="cr"><p class="v serif">500</p><p class="k">Créditos Select</p><p class="s">Por licencia por mes en Business. Usted elige el modelo; también los usan los agentes personalizados propios.</p></div>
+<div class="cr"><p class="v serif">A medida</p><p class="k">En Enterprise</p><p class="s">Montos de créditos personalizados.</p></div>
+<div class="cr"><p class="v serif">30 días · 0</p><p class="k">Conservación de datos</p><p class="s">Los proveedores de IA conservan datos 30 días en Business; en Enterprise, ninguno.</p></div>
+</div>
+<p class="foot">¿Hace falta más? Los administradores pueden comprar créditos de Notion para el espacio de trabajo.</p>
 </div>
 </section>
 
-<section id="elegir" style="display: flex; flex-direction: column; gap: 24px">
-<div style="display: flex; flex-direction: column; gap: 8px">
-<h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 4vw, 36px); line-height: 1.2">¿Business o Enterprise?</h2>
-<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #475569">Marque solo lo que su organización necesita hoy. El primer grupo reúne requisitos que suelen asociarse con Enterprise pero ya cubre Business; los demás, funciones exclusivas de Enterprise. La recomendación se actualiza al instante.</p>
+<section id="elegir" class="sec" style="gap:24px">
+<div class="sec-head">
+<p class="eyebrow">4 · Test rápido</p>
+<h2 class="serif">¿Qué plan necesito?</h2>
+<p class="sub">Marque solo lo que su organización necesita hoy. La recomendación se actualiza al instante.</p>
 </div>
-<div id="sel"></div>
+<div class="res-bar" id="resBar" aria-hidden="true">
+<div><span class="k">Plan recomendado</span><span class="nm serif" id="barName">Enterprise</span></div>
+<span class="c" id="barCount">Sin marcar aún</span>
+</div>
+<div class="quiz">
+<aside class="res" id="res" aria-live="polite">
+<p class="k">Plan recomendado</p>
+<p class="nm serif" id="resName">Enterprise</p>
+<p class="pr" id="resPrice"></p>
+<p class="why" id="resWhy"></p>
+<div id="resReasons" hidden style="display:flex;flex-direction:column;gap:4px">
+<p style="font-size:13px;font-weight:700">Exclusivo de Enterprise:</p>
+<ul id="resList"></ul>
+</div>
+<p class="cnt-t" id="resCount"></p>
+<button type="button" id="resReset">Limpiar selección</button>
+</aside>
+<div class="qs" id="qs"></div>
+</div>
 </section>
 
-
-<section id="contratar" style="display: flex; flex-direction: column; gap: 20px">
-<div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 14px; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px">
-<p style="margin: 0; font-size: 16px; font-weight: 700">Antes de contratar</p>
-<ul style="margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.65; color: #334155">
-<li>El pago anual ahorra hasta un 20 % frente al pago mensual: USD 20 frente a USD 24 por licencia en Business; Enterprise se cotiza con el equipo de ventas de Notion.</li>
-<li>Cada licencia permite que un miembro use el espacio de trabajo, y una licencia agregada se mantiene hasta el fin del período de facturación. Sume a clientes y proveedores como invitados externos, no como miembros.</li>
-<li>Al pasar de Business a Enterprise, el cambio y el cobro son inmediatos y se descuenta la parte del ciclo de facturación que ya se pagó. Al volver de Enterprise a Business, el cambio ocurre al final del ciclo y las funciones exclusivas de Enterprise dejan de estar disponibles.</li>
-<li>Las estadísticas del espacio de trabajo empiezan a registrarse cuando comienza el plan Enterprise: si se anticipa una auditoría, conviene activarlo con tiempo.</li>
-<li>Un dominio personalizado sin la marca de Notion cuesta USD 8 por mes por dominio con pago anual o USD 10 con pago mensual, aparte de la licencia.</li>
-<li>Notion cobra en USD; consulte con su contador los impuestos aplicables a servicios digitales del exterior.</li>
-</ul>
+<section id="contratar" class="sec" style="gap:24px">
+<div class="sec-head">
+<p class="eyebrow">5 · Letra chica</p>
+<h2 class="serif">Antes de contratar</h2>
 </div>
+<div class="tips" id="tips"></div>
 </section>
 
-<footer style="border-top: 1px solid #E2E8F0; padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; line-height: 1.6; color: #64748B">
-<p style="margin: 0; max-width: 680px">Información contrastada con la tabla oficial de notion.com/es/pricing el 25 de noviembre de 2026. Los precios y funciones pueden cambiar; confirme las condiciones finales con Notion.</p>
-<p style="margin: 0; font-weight: 600; color: #334155; display: inline-flex; align-items: center; gap: 10px">Preparado por <a href="https://viamatica.com" target="_blank" rel="noopener" style="display: inline-flex"><img src="https://viamatica.com/wp-content/uploads/2026/09/logo-grupo-Viamatica.png" alt="Viamatica" height="26" style="height: 26px; width: auto; display: block" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Viamatica',style:'font-weight:700;color:#1E3A8A'}))"></a></p>
+<footer>
+<p style="max-width:680px">Información contrastada con la tabla oficial de notion.com/es/pricing el 25 de noviembre de 2026. Los precios y funciones pueden cambiar; confirme las condiciones finales con Notion.</p>
+<p class="by">Preparado por <a href="https://viamatica.com" target="_blank" rel="noopener" style="display:inline-flex"><img src="https://viamatica.com/wp-content/uploads/2026/09/logo-grupo-Viamatica.png" alt="Viamatica" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'Viamatica',style:'font-weight:700;color:#1E3A8A'}))"></a></p>
 </footer>
 
 </main>
-</div>
-<div id="tip" role="tooltip"></div>
-<button type="button" id="selbar" aria-label="Ver el plan recomendado"></button>
+
 <script>
-var Y = '✓';
-var NO = '';
-var PLAN_NAMES = ['Gratuito', 'Plus', 'Business', 'Enterprise'];
-var PLAN_PRICES = ['USD 0', 'USD 10 con pago anual · USD 12 con pago mensual', 'USD 20 con pago anual · USD 24 con pago mensual', 'Precios personalizados'];
-var PLAN_COLORS = ['#475569', '#0F766E', '#1D4ED8', '#5B21B6'];
-var OFFLINE_PAID = 'Descarga automática de Recientes y Favoritos para su uso sin conexión.';
-
-/* Filas, secciones y valores tal como aparecen en notion.com/es/pricing (23/11/2026). */
-var DATA = [
-  ['g', 'Precio por licencia por mes'],
-  ['Pago anual', 'USD 0', 'USD 10', 'USD 20', 'Precios personalizados'],
-  ['Pago mensual', 'USD 0', 'USD 12', 'USD 24', 'Precios personalizados'],
-  ['g', 'Contenido'],
-  ['Almacenamiento en bloques', 'Limitado', Y, Y, Y],
-  ['Carga de archivos', 'Hasta 5 MB', 'Hasta 5 GB', 'Hasta 5 GB', 'Hasta 5 GB'],
-  ['Almacenamiento de archivos', '512 MB', '256 GB + 5 GB/licencia adicional', '512 GB + 10 GB/licencia adicional', 'Personalizado'],
-  ['Historial de páginas', '7 días', '30 días', '90 días', 'Personalizado'],
-  ['Verifica páginas', NO, NO, Y, Y],
-  ['Sin conexión', 'Elija las páginas que desea descargar para su uso sin conexión.', OFFLINE_PAID, OFFLINE_PAID, OFFLINE_PAID],
-  ['g', 'Compartir y colaborar'],
-  ['Límite de invitados externos', '10', 'Ilimitados', 'Ilimitados', 'Ilimitados'],
-  ['Espacios de equipo abiertos y cerrados', Y, Y, Y, Y],
-  ['Espacios de equipo privados', NO, NO, Y, Y],
-  ['Permisos por grupo', Y, Y, Y, Y],
-  ['Permisos avanzados de espacios de equipo', NO, NO, Y, Y],
-  ['Permisos de base de datos específicos', NO, NO, Y, Y],
-  ['g', 'IA de Notion'],
-  ['Créditos Estándar', 'Período de prueba limitado', 'Período de prueba limitado', '1500 por licencia por mes', 'Personalizado'],
-  ['Créditos Select', NO, NO, '500 por licencia por mes', 'Personalizado'],
-  ['Agente de Notion (chat, generación, autocompletado, traducción)', Y, Y, Y, Y],
-  ['Anotador con IA', Y, Y, Y, Y],
-  ['Biblioteca de habilidades', Y, Y, Y, Y],
-  ['Búsqueda Enterprise', NO, NO, 'Slack, GitHub, Gmail, Google Drive, Asana, Linear, PDF', 'Slack, GitHub, Gmail, Google Drive, Microsoft Outlook, Asana, Linear, PDF'],
-  ['Agentes personalizados', NO, NO, Y, Y],
-  ['Workers (beta)', NO, NO, Y, Y],
-  ['Conservación de datos', 'Conservación de 30 días', 'Conservación de 30 días', 'Conservación de 30 días', 'Sin conservación de datos'],
-  ['g', 'Funciones de base de datos'],
-  ['Subtareas y dependencias', Y, Y, Y, Y],
-  ['Propiedades y filtros personalizados', Y, Y, Y, Y],
-  ['Gráficos', '1', Y, Y, Y],
-  ['Formularios', 'Básicas', 'Personalizado', 'Personalizado + lógica condicional', 'Personalizado + lógica condicional'],
-  ['Paneles de control', NO, NO, Y, Y],
-  ['g', 'Automatizaciones y conexiones de API'],
-  ['API pública', Y, Y, Y, Y],
-  ['Webhooks', Y, Y, Y, Y],
-  ['Inserciones y vistas previas de enlaces', Y, Y, Y, Y],
-  ['Propiedades conectadas', NO, 'Google Drive', 'Google Drive + Figma, GitHub, Zendesk', 'Igual que el plan Business'],
-  ['Automatizaciones', 'Básico: solo botones', 'Personalizado: automatizaciones de bases de datos', 'Igual que el plan Plus', 'Igual que el plan Plus'],
-  ['Sincronizaciones de base de datos unidireccionales', NO, NO, 'Asana, GitHub, Jira, GitLab', 'Igual que el plan Business'],
-  ['Herramientas de MCP avanzadas', NO, NO, Y, Y],
-  ['Conexiones avanzadas', NO, NO, NO, Y],
-  ['g', 'Publicación de la web'],
-  ['Páginas publicadas', Y, Y, Y, Y],
-  ['Dominios notion.site', '1', '5', '5', '5'],
-  ['Indexación en motores de búsqueda (SEO)', 'Básicas', 'Avanzadas', 'Avanzadas', 'Avanzadas'],
-  ['Personalización del sitio', NO, Y, Y, Y],
-  ['Dominios personalizados y marca', NO, 'Abona por el dominio', 'Abona por el dominio', 'Abona por el dominio'],
-  ['g', 'Administración y seguridad'],
-  ['Exportar todo el espacio de trabajo como HTML, Markdown y CSV', Y, Y, Y, Y],
-  ['Verificación en dos pasos', Y, Y, Y, Y],
-  ['Exportar todo el espacio de trabajo como PDF', NO, NO, Y, Y],
-  ['Inicio de sesión único (SSO) de SAML', NO, NO, Y, Y],
-  ['Verificación de dominios', NO, NO, Y, Y],
-  ['Aprovisionamiento de usuarios (SCIM)', NO, NO, NO, Y],
-  ['Controles avanzados de seguridad del espacio de trabajo y del espacio de equipo', NO, NO, NO, Y],
-  ['Controles a nivel de organización', NO, NO, NO, Y],
-  ['Estadísticas del espacio de trabajo', NO, NO, NO, Y],
-  ['Funciones de administración específicas', NO, NO, NO, Y],
-  ['Registro de auditoría', NO, NO, NO, Y],
-  ['Búsqueda de contenido de administrador', NO, NO, NO, Y],
-  ['Gestión de dominios', NO, NO, NO, Y],
-  ['Unificación de espacios de trabajo', NO, NO, NO, 'Personalizado'],
-  ['Panel y controles de usuarios administrados', NO, NO, NO, Y],
-  ['Conexiones de seguridad y cumplimiento', NO, NO, NO, Y],
-  ['Solicitudes de invitación', NO, NO, NO, Y],
-  ['Configuración personalizada de conservación de datos', NO, NO, NO, Y],
-  ['Eliminación de transcripciones del Anotador con IA', NO, NO, NO, Y],
-  ['g', 'Soporte'],
-  ['Soporte prioritario', NO, Y, Y, Y],
-  ['Atención prémium', NO, NO, NO, 'Personalizado'],
-  ['Responsable de apoyo exclusivo para clientes (CSM)', NO, NO, NO, 'Personalizado']
-];
-
-/* Explicación de cada fila, mostrada en el botón (i). */
 var INFO = {
   'Pago anual': 'Precio por licencia por mes cuando se paga el año completo por adelantado. Ahorra hasta un 20 % frente al pago mensual.',
   'Pago mensual': 'Precio por licencia cuando se paga mes a mes, sin compromiso anual.',
-  'Almacenamiento en bloques': 'Un bloque es cada pieza de contenido de una página: un párrafo, una viñeta, una casilla de tarea, una imagen. En Gratuito hay un tope: al alcanzarlo se puede seguir leyendo y editando lo existente, pero no agregar bloques nuevos.',
-  'Carga de archivos': 'Tamaño máximo de cada archivo que se sube: imágenes, videos o adjuntos.',
   'Almacenamiento de archivos': 'Espacio total que ocupa el espacio de trabajo, sumando bloques, archivos, imágenes y videos. En Business el total crece con cada licencia adicional; en Enterprise es personalizado.',
   'Historial de páginas': 'Cuánto tiempo atrás se puede restaurar una página a una versión anterior, por ejemplo después de un borrado por error.',
-  'Verifica páginas': 'Permite marcar una página como verificada, es decir, actualizada y confiable. La insignia se ve en los resultados de búsqueda y cuando la IA cita esa página.',
-  'Sin conexión': 'Uso de Notion sin internet en la app de escritorio y en la móvil. En Gratuito se eligen a mano las páginas a descargar; en los planes pagos se descargan solas las recientes y las favoritas.',
-  'Límite de invitados externos': 'Los invitados son personas de fuera de la organización (agencias, clientes, proveedores, independientes) con acceso a páginas puntuales. No son miembros del espacio de trabajo, por lo que no ocupan licencia. El plan Gratuito permite hasta 10; los planes pagos, invitados ilimitados.',
-  'Espacios de equipo abiertos y cerrados': 'Un espacio de equipo es el área propia de un equipo o departamento en la barra lateral. Abierto: cualquier miembro puede entrar y ver el contenido. Cerrado: todos ven que existe, pero solo entra quien es invitado por un propietario o miembro.',
-  'Espacios de equipo privados': 'Un espacio de equipo invisible: nadie lo ve ni lo encuentra salvo las personas agregadas. Pensado para información confidencial, como planificación de la empresa o revisiones de desempeño.',
-  'Permisos por grupo': 'Agrupa personas por puesto o área (por ejemplo, “Ventas”) para dar permisos al grupo completo en lugar de persona por persona.',
-  'Permisos avanzados de espacios de equipo': 'Permite hacer excepciones a los permisos de un espacio de equipo para personas o grupos puntuales, por ejemplo, que alguien solo pueda ver y no editar.',
-  'Permisos de base de datos específicos': 'Permite colaborar en una base de datos sin dar acceso completo: cada persona ve solo las filas que tiene asignadas.',
   'Créditos Estándar': 'Unidad de consumo de la IA para tareas en las que Notion elige el modelo: el Agente de Notion en modo Auto, el Anotador con IA y el autocompletado de bases de datos. En Enterprise los montos son personalizados.',
   'Créditos Select': 'Unidad de consumo de la IA para tareas en las que usted elige el modelo, y para los agentes personalizados propios. Para uso adicional, los administradores pueden comprar créditos.',
-  'Agente de Notion (chat, generación, autocompletado, traducción)': 'El asistente de IA dentro de Notion: conversa, crea y edita documentos, rellena bases de datos, traduce y busca respuestas en el espacio de trabajo. En Gratuito y Plus se usa dentro del período de prueba limitado de créditos.',
-  'Anotador con IA': 'Transcribe las reuniones y genera un resumen que queda guardado en Notion. Consume créditos Estándar.',
-  'Biblioteca de habilidades': 'Instrucciones guardadas para los agentes (por ejemplo, cómo redactar el informe semanal), compartidas con el equipo para reutilizarlas siempre igual.',
   'Búsqueda Enterprise': 'Busca respuestas en Notion y en las herramientas conectadas, como Slack, Microsoft Teams o GitHub, y cita las fuentes. Las conexiones con Jira, Box, OneDrive, Salesforce y Asana están en beta.',
-  'Agentes personalizados': 'Agentes de IA que se configuran una vez y se encargan solos de tareas repetitivas, para que el equipo no tenga que hacerlas.',
-  'Workers (beta)': 'Código propio que corre dentro de Notion para darles herramientas a los agentes, sincronizar datos externos o activar flujos de trabajo, sin necesidad de servidores propios.',
   'Conservación de datos': 'Tiempo durante el que los proveedores de modelos de IA que usa Notion guardan los datos enviados. En Enterprise aplican cero conservación.',
-  'Subtareas y dependencias': 'Dividir una tarea en subtareas y marcar qué tareas dependen de otras.',
-  'Propiedades y filtros personalizados': 'Agregar campos propios a una base de datos (estado, responsable, fecha, prioridad) y filtrar la información por ellos.',
-  'Gráficos': 'Ver los datos de una base de datos como gráficos de barras, de líneas o de anillo. El plan Gratuito permite uno.',
-  'Formularios': 'Formularios cuyas respuestas se cargan directamente en una base de datos de Notion. Los planes pagos permiten personalizarlos, y desde Business suman lógica condicional: preguntas que aparecen o no según las respuestas anteriores.',
-  'Paneles de control': 'Una vista que reúne gráficos, tablas y listas en un solo lugar para tener el resumen del trabajo de un vistazo.',
-  'API pública': 'Permite a desarrolladores conectar Notion con sistemas y flujos de trabajo propios de la empresa.',
-  'Webhooks': 'Avisos automáticos en tiempo real que Notion envía a otros sistemas cuando cambia el contenido.',
-  'Inserciones y vistas previas de enlaces': 'Al pegar un enlace (un pull request de GitHub, un ticket de Jira, un diseño de Figma) se muestra una vista previa que se mantiene actualizada.',
-  'Propiedades conectadas': 'Propiedades de una base de datos vinculadas con otras apps, para ver o enviar información sin salir de Notion. Las apps disponibles cambian según el plan; también se pueden armar flujos con Zapier.',
-  'Automatizaciones': 'Acciones automáticas: crear páginas, cambiar estados, asignar responsables o completar propiedades. En Gratuito solo con botones que se presionan a mano; desde Plus se disparan solas ante cambios en la base de datos.',
-  'Sincronizaciones de base de datos unidireccionales': 'Muestra datos de Jira, GitHub, Asana o GitLab como una base de datos de Notion que se mantiene actualizada. Los cambios viajan en un solo sentido: desde esa app hacia Notion.',
-  'Herramientas de MCP avanzadas': 'MCP es el protocolo con el que asistentes de IA externos, como Claude o ChatGPT, trabajan con Notion. Las herramientas avanzadas permiten analizar varias bases de datos, programar eventos, crear notas de reunión y usar Búsqueda Enterprise, con límites de uso más altos.',
   'Conexiones avanzadas': 'Notion la incluye entre las funciones exclusivas de Enterprise en la tarjeta del plan, sin más detalle en la tabla; conviene confirmar su alcance con el equipo de ventas.',
-  'Verificación de dominios': 'Acredita que el dominio de correo pertenece a la empresa. Notion la lista entre las funciones del plan Business, por lo que está en ambos planes.',
-  'Páginas publicadas':'Publicar páginas de Notion en la web para que cualquier persona pueda verlas.',
-  'Dominios notion.site': 'Direcciones del tipo empresa.notion.site para los sitios publicados.',
-  'Indexación en motores de búsqueda (SEO)': 'Permite que buscadores como Google indexen el sitio. En los planes pagos se pueden personalizar el título y la descripción que aparecen en los resultados.',
-  'Personalización del sitio': 'Página de inicio, ícono, vista previa al compartir el enlace, encabezado propio y modo claro u oscuro.',
-  'Dominios personalizados y marca': 'Usar un dominio propio (por ejemplo, ayuda.empresa.com) y quitar la marca de Notion. Cuesta USD 8 por mes por dominio con pago anual o USD 10 con pago mensual, aparte de la licencia.',
-  'Exportar todo el espacio de trabajo como HTML, Markdown y CSV': 'Copia de seguridad de todas las páginas y del contenido del espacio de trabajo.',
-  'Verificación en dos pasos': 'Un segundo método de verificación al iniciar sesión, también llamado 2FA o MFA.',
-  'Exportar todo el espacio de trabajo como PDF': 'Exporta todo el contenido en PDF de una sola vez. Útil para respaldos por motivos legales o de cumplimiento normativo.',
-  'Inicio de sesión único (SSO) de SAML': 'Los empleados entran a Notion con su cuenta corporativa, gestionada por Sistemas desde el proveedor de identidad de la empresa.',
   'Aprovisionamiento de usuarios (SCIM)': 'Altas y bajas automáticas de miembros desde el proveedor de identidad (por ejemplo, Okta): cuando alguien ingresa o deja la empresa, se refleja solo en Notion.',
   'Controles avanzados de seguridad del espacio de trabajo y del espacio de equipo': 'Permisos adicionales para impedir que ciertas personas compartan páginas con terceros, desactivar invitados o fijar reglas para todo el espacio de trabajo.',
   'Controles a nivel de organización': 'Configuraciones que se aplican a la organización en su conjunto. La tabla de Notion no da más detalle; conviene consultarlo con el equipo de ventas.',
@@ -384,240 +503,260 @@ var INFO = {
   'Solicitudes de invitación': 'Si los invitados están desactivados, los miembros pueden pedirles a los propietarios que agreguen a un invitado.',
   'Configuración personalizada de conservación de datos': 'Define cuándo se eliminan las páginas de la Papelera y durante cuánto tiempo se conservan.',
   'Eliminación de transcripciones del Anotador con IA': 'Los administradores programan el borrado automático de las transcripciones del Anotador con IA para cumplir las políticas internas de conservación.',
-  'Soporte prioritario': 'Atención con prioridad, solicitada desde el botón (?) de la app de escritorio o desde “Ayuda y soporte” en la móvil.',
   'Atención prémium': 'Soporte 24 horas a medida, para equipos con necesidades específicas.',
   'Responsable de apoyo exclusivo para clientes (CSM)': 'Un equipo de Notion dedicado a la cuenta que acompaña la adopción y ayuda a sacarle el máximo provecho.'
 };
 
-/* Cuestionario Business vs Enterprise. lvl 2 = lo cubre Business; lvl 3 = solo Enterprise.
-   [id, pregunta, fila de DATA que la respalda, etiqueta corta para el resultado] */
-var NEEDS = [
-  { title: 'Ya lo cubre Business', lvl: 2, items: [
-    ['sso', '¿Los empleados deben entrar con su cuenta corporativa (Google, Microsoft, Okta)?', 'Inicio de sesión único (SSO) de SAML', 'SSO de SAML'],
-    ['privados', '¿Algún área necesita espacios invisibles para el resto, o que cada persona vea solo sus filas de una base de datos?', 'Espacios de equipo privados', 'Espacios privados y permisos específicos'],
-    ['ia', '¿Quieren IA con créditos mensuales, agentes personalizados o buscar en Slack, GitHub, Gmail o Google Drive?', 'Agentes personalizados', 'IA y agentes personalizados'],
-    ['pdf', '¿Necesitan respaldar todo el espacio de trabajo en PDF o recuperar versiones de hasta 90 días?', 'Exportar todo el espacio de trabajo como PDF', 'Exportar PDF e historial de 90 días']
+/* Filas de notion.com/es/pricing en las que Business y Enterprise difieren con un valor: [clave de INFO, nombre, Business, Enterprise]. */
+var VALUE_ROWS = [
+  ['Pago anual', 'Precio con pago anual', 'USD 20', 'Precios personalizados'],
+  ['Pago mensual', 'Precio con pago mensual', 'USD 24', 'Precios personalizados'],
+  ['Almacenamiento de archivos', 'Almacenamiento de archivos', '512 GB + 10 GB/licencia adicional', 'Personalizado'],
+  ['Historial de páginas', 'Historial de páginas', '90 días', 'Personalizado'],
+  ['Créditos Estándar', 'Créditos Estándar', '1500 por licencia por mes', 'Personalizado'],
+  ['Créditos Select', 'Créditos Select', '500 por licencia por mes', 'Personalizado'],
+  ['Búsqueda Enterprise', 'Búsqueda Enterprise', 'Slack, GitHub, Gmail, Google Drive, Asana, Linear, PDF', 'Lo mismo + Microsoft Outlook'],
+  ['Conservación de datos', 'Conservación de datos en IA', 'Conservación de 30 días', 'Sin conservación de datos']
+];
+
+/* Funciones que solo tiene Enterprise: [clave de INFO, etiqueta corta, nota]. */
+var ENT_GROUPS = [
+  { title: 'Usuarios e identidad', items: [
+    ['Aprovisionamiento de usuarios (SCIM)', 'Aprovisionamiento de usuarios (SCIM)', ''],
+    ['Gestión de dominios', 'Gestión de dominios', ''],
+    ['Panel y controles de usuarios administrados', 'Panel de usuarios administrados', ''],
+    ['Funciones de administración específicas', 'Funciones de administración específicas', ''],
+    ['Solicitudes de invitación', 'Solicitudes de invitación', ''],
+    ['Unificación de espacios de trabajo', 'Unificación de espacios de trabajo', 'A medida']
   ] },
-  { title: 'Usuarios e identidad', lvl: 3, items: [
-    ['scim', '¿Las altas y bajas de empleados deben reflejarse solas en Notion desde Okta, Entra ID u otro proveedor de identidad?', 'Aprovisionamiento de usuarios (SCIM)', 'Aprovisionamiento SCIM'],
-    ['dominio', '¿Hay cuentas o espacios de trabajo creados por empleados con el correo corporativo que la empresa debe controlar o reclamar?', 'Gestión de dominios', 'Gestión de dominios y usuarios administrados'],
-    ['unificar', '¿Existen varios espacios de trabajo de Notion que habría que fusionar en uno?', 'Unificación de espacios de trabajo', 'Unificación de espacios de trabajo'],
-    ['roles', '¿Hace falta delegar la gestión de miembros sin dar acceso a seguridad ni a facturación?', 'Funciones de administración específicas', 'Funciones de administración específicas']
+  { title: 'Seguridad y auditoría', items: [
+    ['Registro de auditoría', 'Registro de auditoría', ''],
+    ['Conexiones de seguridad y cumplimiento', 'Conexiones SIEM y DLP', ''],
+    ['Controles avanzados de seguridad del espacio de trabajo y del espacio de equipo', 'Controles avanzados de seguridad', ''],
+    ['Controles a nivel de organización', 'Controles a nivel de organización', ''],
+    ['Búsqueda de contenido de administrador', 'Búsqueda de contenido de administrador', ''],
+    ['Estadísticas del espacio de trabajo', 'Estadísticas del espacio de trabajo', '']
   ] },
-  { title: 'Seguridad y auditoría', lvl: 3, items: [
-    ['audit', '¿Seguridad o una auditoría exigen un historial de quién hizo qué en el espacio de trabajo?', 'Registro de auditoría', 'Registro de auditoría'],
-    ['siem', '¿Hay que enviar los registros a un SIEM o detectar datos sensibles con una herramienta DLP?', 'Conexiones de seguridad y cumplimiento', 'Conexiones SIEM y DLP'],
-    ['controles', '¿Hay que impedir que los miembros compartan páginas con terceros o desactivar los invitados?', 'Controles avanzados de seguridad del espacio de trabajo y del espacio de equipo', 'Controles avanzados de seguridad'],
-    ['revision', '¿Los administradores deben poder revisar los permisos de todo el contenido o medir el uso de Notion?', 'Búsqueda de contenido de administrador', 'Búsqueda de contenido y estadísticas']
+  { title: 'Datos y conexiones', items: [
+    ['Configuración personalizada de conservación de datos', 'Conservación de datos personalizada', ''],
+    ['Eliminación de transcripciones del Anotador con IA', 'Borrado de transcripciones del Anotador', ''],
+    ['Conexiones avanzadas', 'Conexiones avanzadas', '']
   ] },
-  { title: 'Datos, IA y soporte', lvl: 3, items: [
-    ['retencion', '¿La política de datos prohíbe que los proveedores de IA conserven información, aunque sea 30 días?', 'Conservación de datos', 'Sin conservación de datos en IA'],
-    ['papelera', '¿Hay plazos obligatorios para borrar contenido, como la Papelera o las transcripciones de reuniones?', 'Configuración personalizada de conservación de datos', 'Conservación y borrado personalizados'],
-    ['capacidad', '¿Se necesitará más de 512 GB + 10 GB por licencia de archivos, o historial de más de 90 días?', 'Almacenamiento de archivos', 'Almacenamiento o historial a medida'],
-    ['csm', '¿Quieren un equipo de Notion que acompañe la adopción, o atención prémium?', 'Responsable de apoyo exclusivo para clientes (CSM)', 'Acompañamiento de un equipo de Notion']
+  { title: 'Soporte', items: [
+    ['Atención prémium', 'Atención prémium', 'A medida'],
+    ['Responsable de apoyo exclusivo para clientes (CSM)', 'Responsable exclusivo de clientes (CSM)', 'A medida']
   ] }
 ];
 
+var IA_FEATURES = [
+  ['Agente de Notion', 'Chat, generación, autocompletado y traducción: crea y edita documentos, rellena bases de datos y encuentra respuestas en el espacio de trabajo.', '<path d="M4 5h16v11H8l-4 4z"></path>'],
+  ['Anotador con IA', 'Transcribe las reuniones y guarda un resumen en Notion. En Enterprise, los administradores pueden programar el borrado de las transcripciones.', '<rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><path d="M12 18v3"></path>'],
+  ['Biblioteca de habilidades', 'Instrucciones reutilizables para los agentes, compartidas con todo el equipo: se escriben una vez y cualquiera las aplica igual.', '<path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"></path><path d="M9 8h5"></path><path d="M9 12h5"></path>'],
+  ['Búsqueda Enterprise', 'Responde con Notion y apps conectadas como Slack, Microsoft Teams y GitHub. Jira, Box, OneDrive, Salesforce y Asana, en beta.', '<circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path>'],
+  ['Agentes personalizados', 'Se encargan solos de tareas repetitivas, como el reporte semanal o la clasificación de pedidos.', '<circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path>'],
+  ['Workers (beta)', 'Código propio que corre dentro de Notion para ampliar los agentes, sincronizar datos y activar flujos, sin infraestructura propia.', '<path d="M8 8l-4 4 4 4"></path><path d="M16 8l4 4-4 4"></path><path d="M14 5l-4 14"></path>']
+];
+
+/* Cuestionario. lvl 2 = lo cubre Business; lvl 3 = solo Enterprise. [id, pregunta, etiqueta corta] */
+var NEEDS = [
+  { title: 'Ya lo cubre Business', lvl: 2, items: [
+    ['sso', '¿Los empleados deben entrar con su cuenta corporativa (Google, Microsoft, Okta)?', 'SSO de SAML'],
+    ['privados', '¿Algún área necesita espacios invisibles para el resto, o que cada persona vea solo sus filas de una base de datos?', 'Espacios privados y permisos específicos'],
+    ['ia', '¿Quieren IA con créditos mensuales, agentes personalizados o buscar en Slack, GitHub, Gmail o Google Drive?', 'IA y agentes personalizados'],
+    ['pdf', '¿Necesitan respaldar todo el espacio de trabajo en PDF o recuperar versiones de hasta 90 días?', 'Exportar PDF e historial de 90 días']
+  ] },
+  { title: 'Usuarios e identidad', lvl: 3, items: [
+    ['scim', '¿Las altas y bajas de empleados deben reflejarse solas en Notion desde Okta, Entra ID u otro proveedor de identidad?', 'Aprovisionamiento SCIM'],
+    ['dominio', '¿Hay cuentas o espacios de trabajo creados por empleados con el correo corporativo que la empresa debe controlar o reclamar?', 'Gestión de dominios y usuarios administrados'],
+    ['unificar', '¿Existen varios espacios de trabajo de Notion que habría que fusionar en uno?', 'Unificación de espacios de trabajo'],
+    ['roles', '¿Hace falta delegar la gestión de miembros sin dar acceso a seguridad ni a facturación?', 'Funciones de administración específicas']
+  ] },
+  { title: 'Seguridad y auditoría', lvl: 3, items: [
+    ['audit', '¿Seguridad o una auditoría exigen un historial de quién hizo qué en el espacio de trabajo?', 'Registro de auditoría'],
+    ['siem', '¿Hay que enviar los registros a un SIEM o detectar datos sensibles con una herramienta DLP?', 'Conexiones SIEM y DLP'],
+    ['controles', '¿Hay que impedir que los miembros compartan páginas con terceros o desactivar los invitados?', 'Controles avanzados de seguridad'],
+    ['revision', '¿Los administradores deben poder revisar los permisos de todo el contenido o medir el uso de Notion?', 'Búsqueda de contenido y estadísticas']
+  ] },
+  { title: 'Datos, IA y soporte', lvl: 3, items: [
+    ['retencion', '¿La política de datos prohíbe que los proveedores de IA conserven información, aunque sea 30 días?', 'Sin conservación de datos en IA'],
+    ['papelera', '¿Hay plazos obligatorios para borrar contenido, como la Papelera o las transcripciones de reuniones?', 'Conservación y borrado personalizados'],
+    ['capacidad', '¿Se necesitará más de 512 GB + 10 GB por licencia de archivos, o historial de más de 90 días?', 'Almacenamiento o historial a medida'],
+    ['csm', '¿Quieren un equipo de Notion que acompañe la adopción, o atención prémium?', 'Acompañamiento de un equipo de Notion']
+  ] }
+];
+
+var PLAN = {
+  2: { name: 'Business', price: 'USD 20 con pago anual · USD 24 con pago mensual', color: '#1D4ED8' },
+  3: { name: 'Enterprise', price: 'Precios personalizados', color: '#5B21B6' }
+};
 var WHYS = {
   def: 'Recomendado para organizaciones que priorizan la seguridad y el control: SCIM, registro de auditoría, conexiones SIEM y DLP, sin conservación de datos en IA y acompañamiento personalizado de un equipo de Notion para la adopción. Se cotiza con el equipo de ventas de Notion.',
   2: 'Ninguna de las necesidades marcadas exige Enterprise: Business incluye SSO de SAML, espacios de equipo privados, permisos de base de datos específicos, créditos mensuales de IA y agentes personalizados.',
   3: 'Al menos una necesidad marcada es exclusiva de Enterprise. Se cotiza con el equipo de ventas de Notion.'
 };
 
-var state = { picked: {} };
-function setState(p) { Object.assign(state, p); render(); }
+var TIPS = [
+  ['El pago anual ahorra hasta un 20 %','USD 20 frente a USD 24 por licencia en Business. Enterprise se cotiza con el equipo de ventas de Notion.'],
+  ['Una licencia, un miembro', 'Una licencia agregada se mantiene hasta el fin del período de facturación. Clientes y proveedores entran como invitados externos, no como miembros.'],
+  ['Subir es inmediato; bajar, al final del ciclo', 'De Business a Enterprise: cambio y cobro inmediatos, descontando lo ya pagado del ciclo. De Enterprise a Business: al final del ciclo, y las funciones exclusivas dejan de estar disponibles.'],
+  ['Las estadísticas empiezan con Enterprise', 'Se registran recién cuando comienza el plan: si anticipa una auditoría, conviene activarlo con tiempo.'],
+  ['El dominio propio se paga aparte', 'Un dominio personalizado sin la marca de Notion cuesta USD 8 por mes por dominio con pago anual o USD 10 con pago mensual.'],
+  ['Notion cobra en USD', 'Consulte con su contador los impuestos aplicables a servicios digitales del exterior.']
+];
 
-var H = [];
-function h(fn) { H.push(fn); return H.length - 1; }
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
-
-var CHECK_ICON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Incluido"><path d="M5 12l5 5L20 7"></path></svg>';
-var NO_ICON = '<span aria-label="No incluido" style="color: #94A3B8">—</span>';
-var INFO_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5"></path><path d="M12 7.5h.01"></path></svg>';
-function infoBtn(key) {
-  if (!INFO[key]) return '';
-  return '<button type="button" class="info" data-tip="' + esc(key) + '" aria-expanded="false" aria-label="Qué significa: ' + esc(key) + '">' + INFO_ICON + '</button>';
+function svg(inner, color, size, sw) {
+  return '<svg class="ico" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="' + color + '" stroke-width="' + sw + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
 }
-function valueHtml(v) {
-  if (v === Y) return CHECK_ICON;
-  if (v === NO) return NO_ICON;
-  return esc(v);
-}
+var P_CHECK = '<path d="M5 12l5 5L20 7"></path>';
+var P_INFO = '<circle cx="12" cy="12" r="9"></circle><path d="M12 11v5"></path><path d="M12 7.5h.01"></path>';
+var P_CHEV = '<path d="M6 9l6 6 6-6"></path>';
+function chev() { return '<span class="chev">' + svg(P_CHEV, '#475569', 18, 2) + '</span>'; }
+var uid = 0;
 
-/* Solo las filas de DATA en las que Business (r[3]) y Enterprise (r[4]) difieren. */
-function diffRows() {
-  var rows = [], group = null;
-  DATA.forEach(function (r) {
-    if (r[0] === 'g') { group = r; return; }
-    if (r[3] === r[4] || String(r[4]).indexOf('Igual que') === 0) return;
-    if (group) { rows.push(group); group = null; }
-    rows.push(r);
+/* Viñetas con check en las tarjetas de plan */
+[].forEach.call(document.querySelectorAll('.checks'), function (ul) {
+  var c = ul.getAttribute('data-color');
+  [].forEach.call(ul.children, function (li) { li.insertAdjacentHTML('afterbegin', svg(P_CHECK, c, 18, 2.4)); });
+});
+
+/* Tabla de valores */
+document.getElementById('vtRows').innerHTML = VALUE_ROWS.map(function (r) {
+  var id = 'vt' + (uid++);
+  var strong = r[3] === 'Sin conservación de datos' ? ' style="font-weight:700"' : '';
+  return '<div class="vt-row" role="row"><div class="vt-grid">'
+    + '<button type="button" class="vt-name" role="rowheader" data-toggle="vt-row" aria-expanded="false" aria-controls="' + id + '"><span>' + esc(r[1]) + '</span>' + svg(P_INFO, 'currentColor', 18, 2) + '</button>'
+    + '<div class="vt-c b" role="cell"><span class="lbl">Business</span><span>' + esc(r[2]) + '</span></div>'
+    + '<div class="vt-c e" role="cell"><span class="lbl">Enterprise</span><span' + strong + '>' + esc(r[3]) + '</span></div>'
+    + '</div><p class="vt-info" id="' + id + '">' + esc(INFO[r[0]]) + '</p></div>';
+}).join('');
+
+/* Solo Enterprise */
+var entCount = 0;
+document.getElementById('entGroups').innerHTML = ENT_GROUPS.map(function (g) {
+  entCount += g.items.length;
+  var gid = 'eg' + (uid++);
+  return '<div class="eg"><button type="button" class="eg-head" data-toggle="eg" aria-expanded="false" aria-controls="' + gid + '"><span class="t">' + esc(g.title) + '</span><span class="cnt">' + g.items.length + '</span>' + chev() + '</button>'
+    + '<div class="eg-body" id="' + gid + '">' + g.items.map(function (it) {
+      var id = 'ei' + (uid++);
+      return '<div class="ei"><button type="button" class="ei-btn" data-toggle="ei" aria-expanded="false" aria-controls="' + id + '">' + svg(P_CHECK, '#5B21B6', 18, 2.4)
+        + '<span class="t">' + esc(it[1]) + '</span>' + (it[2] ? '<span class="nt">' + esc(it[2]) + '</span>' : '') + '</button>'
+        + '<p class="ei-info" id="' + id + '">' + esc(INFO[it[0]]) + '</p></div>';
+    }).join('') + '</div></div>';
+}).join('');
+document.getElementById('entCount').textContent = entCount;
+document.getElementById('entCount2').textContent = entCount;
+
+/* Funciones de IA */
+document.getElementById('feats').innerHTML = IA_FEATURES.map(function (f) {
+  var id = 'ft' + (uid++);
+  return '<article class="ft"><button type="button" class="ft-head" data-toggle="ft" aria-expanded="false" aria-controls="' + id + '"><span class="ft-ico">' + svg(f[2], '#1D4ED8', 22, 1.8) + '</span><span class="t">' + esc(f[0]) + '</span>' + chev() + '</button>'
+    + '<p class="ft-txt" id="' + id + '">' + esc(f[1]) + '</p></article>';
+}).join('');
+
+/* Antes de contratar */
+document.getElementById('tips').innerHTML = TIPS.map(function (t, i) {
+  var id = 'tp' + (uid++);
+  return '<article class="tp"><button type="button" class="tp-head" data-toggle="tp" aria-expanded="false" aria-controls="' + id + '"><span class="num">' + (i + 1) + '</span><span class="t">' + esc(t[0]) + '</span>' + chev() + '</button>'
+    + '<p class="tp-txt" id="' + id + '">' + esc(t[1]) + '</p></article>';
+}).join('');
+
+/* Desplegables: alternan la clase .open en su contenedor */
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('[data-toggle]');
+  if (!b) return;
+  var box = b.closest('.' + b.getAttribute('data-toggle'));
+  var on = box.classList.toggle('open');
+  b.setAttribute('aria-expanded', on ? 'true' : 'false');
+});
+
+/* IA general frente a IA de Notion (pestañas en celular) */
+var vs = document.getElementById('vs');
+[].forEach.call(vs.querySelectorAll('.vs-tabs button'), function (b) {
+  b.addEventListener('click', function () {
+    vs.setAttribute('data-tab', b.getAttribute('data-tab'));
+    [].forEach.call(vs.querySelectorAll('.vs-tabs button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
   });
-  return rows;
-}
+});
 
-function renderCmp() {
-  var cols = 'grid-template-columns: minmax(220px, 1.3fr) repeat(2, minmax(0, 1fr))';
-  var out = '<div class="cmp-wrap" style="overflow-x: auto; border: 1px solid #E2E8F0; border-radius: 12px"><div role="table" class="cmp-table" aria-label="Diferencias entre Business y Enterprise" style="min-width: 600px">'
-    + '<div role="row" class="cmp-head" style="display: grid; ' + cols + '; background: #0F172A; color: #FFFFFF">'
-    + '<div role="columnheader" style="padding: 14px 16px; font-size: 13px; font-weight: 600; position: sticky; left: 0; background: #0F172A">Función</div>'
-    + '<div role="columnheader" style="padding: 14px 16px; font-size: 15px; font-weight: 700; background: #1E3A8A">Business</div>'
-    + '<div role="columnheader" style="padding: 14px 16px; font-size: 15px; font-weight: 700; background: #4C1D95">Enterprise</div>'
-    + '</div>';
-  diffRows().forEach(function (r) {
-    if (r[0] === 'g') {
-      out += '<div role="row" class="cmp-group" style="background: #F1F5F9; border-top: 1px solid #E2E8F0"><div role="cell" style="padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #334155; position: sticky; left: 0; display: inline-block; background: #F1F5F9">' + esc(r[1]) + '</div></div>';
-      return;
-    }
-    out += '<div role="row" class="cmp-row" style="display: grid; ' + cols + '; border-top: 1px solid #E2E8F0; background: #FFFFFF">'
-      + '<div role="rowheader" class="cmp-rh" style="padding: 12px 16px; font-size: 14px; font-weight: 600; line-height: 1.4; position: sticky; left: 0; background: #FFFFFF; border-right: 1px solid #F1F5F9; display: flex; align-items: flex-start; justify-content: space-between; gap: 4px"><span>' + esc(r[0]) + '</span>' + infoBtn(r[0]) + '</div>'
-      + '<div role="cell" class="cmp-c cmp-biz" data-plan="Business" style="padding: 12px 16px; font-size: 14px; line-height: 1.45; font-weight: 500; color: #0F172A; background: #F8FAFF">' + valueHtml(r[3]) + '</div>'
-      + '<div role="cell" class="cmp-c cmp-ent" data-plan="Enterprise" style="padding: 12px 16px; font-size: 14px; line-height: 1.45; font-weight: 500; color: #0F172A; background: #FAF5FF">' + valueHtml(r[4]) + '</div>'
-      + '</div>';
-  });
-  return out + '</div></div><p class="cmp-hint" style="margin: 0; font-size: 13px; color: #64748B">En pantallas chicas, deslice la tabla hacia los costados.</p>';
-}
+/* Test */
+var picked = {};
+var qs = document.getElementById('qs');
+qs.innerHTML = NEEDS.map(function (g) {
+  var c = PLAN[g.lvl].color, tint = g.lvl === 2 ? '#EFF6FF' : '#F5F3FF';
+  return '<div class="qg"><div class="qg-h"><p class="t" style="color:' + c + '">' + esc(g.title) + '</p><span class="bd" style="color:' + c + ';background:' + tint + '">' + (g.lvl === 2 ? 'Business alcanza' : 'Solo Enterprise') + '</span></div><div class="qg-items">'
+    + g.items.map(function (it) {
+      return '<button type="button" class="qi" data-need="' + it[0] + '" data-color="' + c + '" aria-pressed="false"><span class="box"></span><span class="tx"><span class="l">' + esc(it[2]) + '</span><span class="q">' + esc(it[1]) + '</span></span></button>';
+    }).join('') + '</div></div>';
+}).join('');
+/* La barra fija del celular vive dentro de las preguntas, así deja de verse al llegar al resultado. */
+qs.insertBefore(document.getElementById('resBar'), qs.firstChild);
 
-function renderSel() {
+function renderResult() {
   var count = 0, reasons = [];
   NEEDS.forEach(function (g) {
     g.items.forEach(function (it) {
-      if (!state.picked[it[0]]) return;
+      if (!picked[it[0]]) return;
       count++;
-      if (g.lvl === 3) reasons.push(it[3]);
+      if (g.lvl === 3) reasons.push(it[2]);
     });
   });
   /* Enterprise por defecto; Business solo si se marcó algo y nada de ello es exclusivo de Enterprise. */
   var level = count > 0 && reasons.length === 0 ? 2 : 3;
   var whyKey = level === 2 ? 2 : (reasons.length ? 3 : 'def');
-  var check = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>';
-  var countText = count === 0 ? 'Todavía no marcó ninguna necesidad.' : (count === 1 ? '1 necesidad marcada' : count + ' necesidades marcadas');
-  var reasonsHtml = reasons.length ? '<div style="display: flex; flex-direction: column; gap: 4px"><p style="margin: 0; font-size: 13px; font-weight: 600; color: #FFFFFF">Exclusivo de Enterprise:</p><ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.5; color: #F1F5F9">' + reasons.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>' : '';
-  var out = '<div style="display: flex; flex-direction: row-reverse; flex-wrap: wrap; gap: 20px; align-items: flex-start">'
-    + '<aside class="sel-aside" aria-live="polite" style="flex: 1 1 300px; position: sticky; top: 84px; z-index: 1; background: ' + PLAN_COLORS[level] + '; color: #FFFFFF; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 10px 30px rgba(15,23,42,.18)">'
-    + '<p style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #E2E8F0">Plan recomendado</p>'
-    + '<p style="margin: 0; font-family: \'Source Serif 4\', Georgia, serif; font-size: clamp(36px, 6vw, 48px); font-weight: 700; line-height: 1">' + esc(PLAN_NAMES[level]) + '</p>'
-    + '<p style="margin: 0; font-size: 15px; font-weight: 600">' + esc(PLAN_PRICES[level]) + '</p>'
-    + '<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #F1F5F9">' + esc(WHYS[whyKey]) + '</p>'
-    + reasonsHtml
-    + '<p style="margin: 0; font-size: 13px; color: #E2E8F0">' + esc(countText) + '</p>'
-    + '<button type="button" data-h="' + h(function () { setState({ picked: {} }); }) + '" style="align-self: flex-start; min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,.7); background: transparent; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer">Limpiar selección</button>'
-    + '</aside><div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px">';
-  NEEDS.forEach(function (g) {
-    var c = PLAN_COLORS[g.lvl];
-    out += '<div style="display: flex; flex-direction: column; gap: 10px"><p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: ' + c + '">' + esc(g.lvl === 2 ? g.title : g.title + ' · Solo Enterprise') + '</p>'
-      + '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px">';
-    g.items.forEach(function (it) {
-      var on = !!state.picked[it[0]];
-      var toggle = function () { var next = Object.assign({}, state.picked); next[it[0]] = !next[it[0]]; setState({ picked: next }); };
-      out += '<div style="display: flex; align-items: center; min-height: 56px; padding-right: 8px; border-radius: 10px; border: ' + (on ? '2px solid ' + c : '1px solid #CBD5E1') + '; background: ' + (on ? '#FFFFFF' : '#F8FAFC') + '">'
-        + '<button type="button" data-h="' + h(toggle) + '" aria-pressed="' + on + '" style="flex: 1; display: flex; align-items: center; gap: 12px; text-align: left; min-height: 54px; padding: 12px 6px 12px 14px; border: none; border-radius: 10px; background: transparent; font-size: 14px; line-height: 1.4; color: #0F172A; cursor: pointer">'
-        + '<span style="flex: none; width: 22px; height: 22px; border-radius: 6px; border: 2px solid ' + (on ? c : '#94A3B8') + '; background: ' + (on ? c : '#FFFFFF') + '; display: inline-flex; align-items: center; justify-content: center">' + (on ? check : '') + '</span>'
-        + '<span style="flex: 1">' + esc(it[1]) + '</span></button>' + infoBtn(it[2]) + '</div>';
-    });
-    out += '</div></div>';
+  var p = PLAN[level];
+  document.getElementById('res').style.background = p.color;
+  document.getElementById('resBar').style.background = p.color;
+  document.getElementById('resName').textContent = p.name;
+  document.getElementById('barName').textContent = p.name;
+  document.getElementById('resPrice').textContent = p.price;
+  document.getElementById('resWhy').textContent = WHYS[whyKey];
+  var rs = document.getElementById('resReasons');
+  rs.hidden = !reasons.length;
+  rs.style.display = reasons.length ? 'flex' : 'none';
+  document.getElementById('resList').innerHTML = reasons.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('');
+  document.getElementById('resCount').textContent = count === 0 ? 'Todavía no marcó ninguna necesidad.' : (count === 1 ? '1 necesidad marcada' : count + ' necesidades marcadas');
+  document.getElementById('barCount').textContent = count === 0 ? 'Sin marcar aún' : (count === 1 ? '1 marcada' : count + ' marcadas');
+  [].forEach.call(qs.querySelectorAll('.qi'), function (b) {
+    var on = !!picked[b.getAttribute('data-need')], c = b.getAttribute('data-color');
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    b.style.border = on ? '2px solid ' + c : '';
+    b.style.padding = on ? '13px' : '';
+    b.style.background = on ? '#FFFFFF' : '';
+    var box = b.querySelector('.box');
+    box.style.borderColor = on ? c : '';
+    box.style.background = on ? c : '';
+    box.innerHTML = on ? svg(P_CHECK, '#FFFFFF', 14, 3) : '';
   });
-  return out + '</div></div>';
 }
+qs.addEventListener('click', function (e) {
+  var b = e.target.closest('.qi');
+  if (!b) return;
+  var k = b.getAttribute('data-need');
+  picked[k] = !picked[k];
+  renderResult();
+});
+document.getElementById('resReset').addEventListener('click', function () { picked = {}; renderResult(); });
+renderResult();
 
-function render() {
-  if (typeof hideTip === 'function') hideTip();
-  H = [];
-  document.getElementById('cmp').innerHTML = renderCmp();
-  document.getElementById('sel').innerHTML = renderSel();
-  var bar = document.getElementById('selbar');
-  if (bar) {
-    var a = document.querySelector('#sel .sel-aside');
-    var name = a.querySelector('p:nth-child(2)').textContent;
-    bar.style.background = name === 'Enterprise' ? '#5B21B6' : '#1D4ED8';
-    bar.innerHTML = '<span style="font-size: 12px; letter-spacing: .1em; text-transform: uppercase; opacity: .85">Plan recomendado</span><strong style="font-size: 18px">' + esc(name) + '</strong>';
-  }
-}
-var tip = document.getElementById('tip');
-var tipBtn = null, tipPinned = false;
-function showTip(btn, pinned) {
-  if (tipBtn && tipBtn !== btn) tipBtn.setAttribute('aria-expanded', 'false');
-  var key = btn.getAttribute('data-tip');
-  tip.innerHTML = '<strong>' + esc(key) + '</strong>' + esc(INFO[key]);
-  tip.style.display = 'block';
-  tipBtn = btn; tipPinned = !!pinned;
-  btn.setAttribute('aria-expanded', 'true');
-  btn.setAttribute('aria-describedby', 'tip');
-  var r = btn.getBoundingClientRect(), w = tip.offsetWidth, th = tip.offsetHeight, m = 8;
-  var left = Math.min(Math.max(m, r.left + r.width / 2 - w / 2), window.innerWidth - w - m);
-  var top = r.bottom + m;
-  if (top + th > window.innerHeight - m && r.top - th - m > m) top = r.top - th - m;
-  tip.style.left = left + 'px';
-  tip.style.top = top + 'px';
-}
-function hideTip() {
-  if (tipBtn) { tipBtn.setAttribute('aria-expanded', 'false'); tipBtn.removeAttribute('aria-describedby'); }
-  tip.style.display = 'none'; tipBtn = null; tipPinned = false;
-}
-document.addEventListener('click', function (e) {
-  var info = e.target.closest('.info');
-  if (info) {
-    if (tipBtn === info && tipPinned) hideTip(); else showTip(info, true);
-    return;
-  }
-  if (tipBtn && !e.target.closest('#tip')) hideTip();
-  var b = e.target.closest('[data-h]');
-  if (b && H[+b.dataset.h]) H[+b.dataset.h]();
-});
-document.addEventListener('mouseover', function (e) {
-  var info = e.target.closest && e.target.closest('.info');
-  if (info && !tipPinned) showTip(info, false);
-});
-document.addEventListener('mouseout', function (e) {
-  var info = e.target.closest && e.target.closest('.info');
-  if (info && !tipPinned && !(e.relatedTarget && info.contains(e.relatedTarget))) hideTip();
-});
-document.addEventListener('focusin', function (e) {
-  if (e.target.classList && e.target.classList.contains('info')) showTip(e.target, false);
-});
-document.addEventListener('focusout', function (e) {
-  if (e.target.classList && e.target.classList.contains('info') && !tipPinned) hideTip();
-});
-document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hideTip(); });
-window.addEventListener('scroll', function () { if (tipBtn) hideTip(); }, true);
-window.addEventListener('resize', hideTip);
-render();
+/* Resalta en la barra la sección visible */
 (function () {
   var links = [].slice.call(document.querySelectorAll('#secnav .navlink'));
   var secs = links.map(function (l) { return document.querySelector(l.getAttribute('href')); });
-  var prog = document.getElementById('navprog');
   function update() {
-    var y = window.scrollY + 100, cur = -1;
+    var y = window.scrollY + 120, cur = -1;
     secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top + window.scrollY <= y) cur = i; });
     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = secs.length - 1;
     links.forEach(function (l, i) {
       if (i === cur) {
-        if (l.getAttribute('aria-current') !== 'true') { l.setAttribute('aria-current', 'true'); var box = l.parentNode; box.scrollLeft = l.offsetLeft - (box.clientWidth - l.offsetWidth) / 2; }
+        if (l.getAttribute('aria-current') !== 'true') {
+          l.setAttribute('aria-current', 'true');
+          var box = l.parentNode;
+          box.scrollLeft = l.offsetLeft - (box.clientWidth - l.offsetWidth) / 2;
+        }
       } else l.removeAttribute('aria-current');
     });
-    var bar = document.getElementById('selbar'), sel = document.getElementById('elegir'), asideEl = document.querySelector('#sel .sel-aside');
-    if (bar && sel && asideEl) {
-      var sr = sel.getBoundingClientRect(), ar = asideEl.getBoundingClientRect();
-      var show = sr.top < window.innerHeight * 0.5 && sr.bottom > window.innerHeight * 0.6 && (ar.bottom < 70 || ar.top > window.innerHeight);
-      bar.classList.toggle('on', show);
-    }
-    var max = document.documentElement.scrollHeight - window.innerHeight;
-    prog.style.width = (max > 0 ? Math.min(100, window.scrollY / max * 100) : 0) + '%';
   }
-  links.forEach(function (l, i) {
-    l.addEventListener('click', function (e) {
-      if (!secs[i]) return;
-      e.preventDefault();
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({ top: secs[i].getBoundingClientRect().top + window.scrollY - 76, behavior: reduce ? 'auto' : 'smooth' });
-      if (history.replaceState) history.replaceState(null, '', l.getAttribute('href'));
-    });
-  });
-  document.getElementById('selbar').addEventListener('click', function () {
-    var a = document.querySelector('#sel .sel-aside');
-    window.scrollTo({ top: a.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' });
-  });
-  document.addEventListener('click', function () { setTimeout(update, 0); });
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   update();
