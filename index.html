@@ -98,6 +98,8 @@ h3.sub-t{font-size:18px;font-weight:700}
 .ei-btn:hover{background:#F5F3FF}
 .ei-btn .t{flex:1}
 .ei-btn .nt{flex:none;font-size:12px;font-weight:600;color:#475569}
+.ei-chev{flex:none;display:inline-flex;transition:transform .2s}
+.ei.open .ei-chev{transform:rotate(180deg)}
 .ei-info{display:none;padding:0 10px 12px 36px;font-size:13px;line-height:1.55;color:#334155}
 .ei.open .ei-info{display:block}
 
@@ -270,7 +272,7 @@ footer img{height:26px;width:auto;display:block}
 
   footer{flex-direction:column;align-items:flex-start;font-size:12px}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.navlink,.chev,.res,.res-bar{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.navlink,.chev,.ei-chev,.res,.res-bar{transition:none}}
 </style>
 </head>
 <body>
@@ -640,7 +642,7 @@ document.getElementById('entGroups').innerHTML = ENT_GROUPS.map(function (g) {
     + '<div class="eg-body" id="' + gid + '">' + g.items.map(function (it) {
       var id = 'ei' + (uid++);
       return '<div class="ei"><button type="button" class="ei-btn" data-toggle="ei" aria-expanded="false" aria-controls="' + id + '">' + svg(P_CHECK, '#5B21B6', 18, 2.4)
-        + '<span class="t">' + esc(it[1]) + '</span>' + (it[2] ? '<span class="nt">' + esc(it[2]) + '</span>' : '') + '</button>'
+        + '<span class="t">' + esc(it[1]) + '</span>' + (it[2] ? '<span class="nt">' + esc(it[2]) + '</span>' : '') + '<span class="ei-chev">' + svg(P_CHEV, '#475569', 16, 2) + '</span></button>'
         + '<p class="ei-info" id="' + id + '">' + esc(INFO[it[0]]) + '</p></div>';
     }).join('') + '</div></div>';
 }).join('');
