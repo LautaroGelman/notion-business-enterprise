@@ -441,13 +441,13 @@ footer img{height:26px;width:auto;display:block}
 <p class="sub">Marque solo lo que su organización necesita hoy. La recomendación se actualiza al instante.</p>
 </div>
 <div class="res-bar" id="resBar" aria-hidden="true">
-<div><span class="k">Plan recomendado</span><span class="nm serif" id="barName">Enterprise</span></div>
+<div><span class="k">Plan recomendado</span><span class="nm serif" id="barName">Business</span></div>
 <span class="c" id="barCount">Sin marcar aún</span>
 </div>
 <div class="quiz">
 <aside class="res" id="res" aria-live="polite">
 <p class="k">Plan recomendado</p>
-<p class="nm serif" id="resName">Enterprise</p>
+<p class="nm serif" id="resName">Business</p>
 <p class="pr" id="resPrice"></p>
 <p class="why" id="resWhy"></p>
 <div id="resReasons" hidden style="display:flex;flex-direction:column;gap:4px">
@@ -588,7 +588,7 @@ var PLAN = {
   3: { name: 'Enterprise', price: 'Precios personalizados', color: '#5B21B6' }
 };
 var WHYS = {
-  def: 'Recomendado para organizaciones que priorizan la seguridad y el control: SCIM, registro de auditoría, conexiones SIEM y DLP, sin conservación de datos en IA y acompañamiento personalizado de un equipo de Notion para la adopción. Se cotiza con el equipo de ventas de Notion.',
+  def: 'Business incluye SSO de SAML, espacios de equipo privados, permisos de base de datos específicos, créditos mensuales de IA y agentes personalizados. Si marca una necesidad exclusiva de Enterprise, la recomendación cambia.',
   2: 'Ninguna de las necesidades marcadas exige Enterprise: Business incluye SSO de SAML, espacios de equipo privados, permisos de base de datos específicos, créditos mensuales de IA y agentes personalizados.',
   3: 'Al menos una necesidad marcada es exclusiva de Enterprise. Se cotiza con el equipo de ventas de Notion.'
 };
@@ -699,9 +699,9 @@ function renderResult() {
       if (g.lvl === 3) reasons.push(it[2]);
     });
   });
-  /* Enterprise por defecto; Business solo si se marcó algo y nada de ello es exclusivo de Enterprise. */
-  var level = count > 0 && reasons.length === 0 ? 2 : 3;
-  var whyKey = level === 2 ? 2 : (reasons.length ? 3 : 'def');
+  /* Business por defecto; Enterprise en cuanto se marca algo exclusivo de Enterprise. */
+  var level = reasons.length ? 3 : 2;
+  var whyKey = reasons.length ? 3 : (count ? 2 : 'def');
   var p = PLAN[level];
   document.getElementById('res').style.background = p.color;
   document.getElementById('resBar').style.background = p.color;
